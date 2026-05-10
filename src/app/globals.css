@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #8B5CF6;
+  --color-primary-hover: #7C3AED;
+  --color-secondary: #F3F4F6;
+  --color-accent: #FBBF24;
+  
+  --color-brand-purple: #8B5CF6;
+  --color-brand-light: #F5F3FF;
+  --color-brand-dark: #4C1D95;
+
+  --shadow-premium: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+  --shadow-premium-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  --radius-premium: 1rem;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0F172A;
+  --primary: #8B5CF6;
+  --secondary: #F8FAFC;
+  --muted: #64748B;
+  --border: #E2E8F0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #020617;
+    --foreground: #F8FAFC;
+    --primary: #A78BFA;
+    --secondary: #1E293B;
+    --muted: #94A3B8;
+    --border: #334155;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), sans-serif;
+  overflow-x: hidden;
+}
+
+.premium-card {
+  @apply bg-white dark:bg-slate-900 rounded-[--radius-premium] border border-slate-100 dark:border-slate-800 shadow-[--shadow-premium] transition-all duration-300 hover:shadow-[--shadow-premium-hover] hover:-translate-y-1;
+}
+
+.glass-effect {
+  @apply bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-slow-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-spin-slow-reverse {
+  animation: spin-slow-reverse 8s linear infinite;
+}
