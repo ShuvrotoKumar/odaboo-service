@@ -2,25 +2,25 @@ export const CATEGORIES = [
   {
     id: 1,
     name: "Home Services",
-    image: "https://images.unsplash.com/photo-1581578731522-9b7d7b89751f?q=80&w=500&auto=format&fit=crop",
+    image: "/s1.jpg",
     count: 120,
   },
   {
     id: 2,
     name: "Food & Catering",
-    image: "https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=500&auto=format&fit=crop",
+    image: "/s2.jpg",
     count: 85,
   },
   {
     id: 3,
     name: "Cleaning Services",
-    image: "https://images.unsplash.com/photo-1581578731522-9b7d7b89751f?q=80&w=500&auto=format&fit=crop",
+    image: "/s3.jpg",
     count: 200,
   },
   {
     id: 4,
     name: "Automotive Services",
-    image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=500&auto=format&fit=crop",
+    image: "/s4.jpg",
     count: 45,
   },
 ];

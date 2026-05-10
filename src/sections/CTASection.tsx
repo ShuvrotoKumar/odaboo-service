@@ -14,10 +14,10 @@ export const CTASection = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6">
             Ready to Get Started?
           </h2>
-          <p className="text-xl text-slate-600 dark:text-slate-400 mb-10 leading-relaxed">
+          <p className="text-xl text-slate-600 mb-10 leading-relaxed">
             Join thousands of satisfied customers and skilled professionals on Odaboo. 
             Whether you need a service or want to offer one, we've got you covered.
           </p>
