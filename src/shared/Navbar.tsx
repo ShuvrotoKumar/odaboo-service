@@ -44,24 +44,15 @@ export const Navbar = () => {
       <Container>
         <div className="flex items-center justify-between gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center group shrink-0">
-            <div className="relative flex items-center">
-              <span className="text-3xl font-bold text-[#71599C]">oda</span>
-              <span className="text-3xl font-bold text-[#24B8C1] relative">
-                boo
-                {/* Circular Arrows (Simplified SVG representation) */}
-                <div className="absolute -top-3 -right-2 w-8 h-8 pointer-events-none">
-                  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-[#FBBF24] animate-spin-slow">
-                    <path d="M12 2C6.48 2 2 6.48 2 12C2 13.59 2.37 15.09 3.04 16.42L5.47 14.71C5.17 13.88 5 12.97 5 12C5 8.13 8.13 5 12 5V2ZM18.53 7.29L16.1 9C16.4 9.83 16.57 10.74 16.57 11.67C16.57 15.54 13.44 18.67 9.57 18.67V21.67C15.09 21.67 19.57 17.19 19.57 11.67C19.57 10.08 19.2 8.58 18.53 7.25L18.53 7.29Z" fill="currentColor" />
-                  </svg>
-                </div>
-                <div className="absolute -bottom-3 -left-2 w-8 h-8 pointer-events-none rotate-180">
-                  <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-[#FBBF24] animate-spin-slow-reverse">
-                    <path d="M12 2C6.48 2 2 6.48 2 12C2 13.59 2.37 15.09 3.04 16.42L5.47 14.71C5.17 13.88 5 12.97 5 12C5 8.13 8.13 5 12 5V2ZM18.53 7.29L16.1 9C16.4 9.83 16.57 10.74 16.57 11.67C16.57 15.54 13.44 18.67 9.57 18.67V21.67C15.09 21.67 19.57 17.19 19.57 11.67C19.57 10.08 19.2 8.58 18.53 7.25L18.53 7.29Z" fill="currentColor" />
-                  </svg>
-                </div>
-              </span>
-            </div>
+          <Link href="/" className="flex items-center shrink-0">
+            <Image
+              src="/Logo.png"
+              alt="Odaboo Logo"
+              width={150}
+              height={50}
+              className="h-10 w-auto object-contain"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav Links */}
@@ -150,10 +141,15 @@ export const Navbar = () => {
             className="fixed inset-0 z-40 lg:hidden bg-white p-6 flex flex-col"
           >
             <div className="flex justify-between items-center mb-8">
-              <span className="text-2xl font-bold">
-                <span className="text-[#71599C]">oda</span>
-                <span className="text-[#24B8C1]">boo</span>
-              </span>
+              <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                <Image
+                  src="/Logo.png"
+                  alt="Odaboo Logo"
+                  width={120}
+                  height={35}
+                  className="h-9 w-auto object-contain"
+                />
+              </Link>
               <button onClick={() => setIsMobileMenuOpen(false)}>
                 <X className="w-6 h-6" />
               </button>

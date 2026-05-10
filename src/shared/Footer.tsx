@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { MessageCircle, X, Camera, Users, Mail, Phone, MapPin } from "lucide-react";
 import { Container } from "@/components/Container";
 import { PrimaryButton } from "@/components/PrimaryButton";
@@ -43,12 +44,13 @@ export const Footer = () => {
           {/* Logo & Info */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white font-bold text-xl">
-                O
-              </div>
-              <span className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-                odaboo<span className="text-primary">.</span>
-              </span>
+              <Image
+                src="/Logo.png"
+                alt="Odaboo Logo"
+                width={120}
+                height={35}
+                className="h-9 w-auto object-contain grayscale hover:grayscale-0 transition-all"
+              />
             </Link>
             <p className="text-slate-600 dark:text-slate-400 mb-8 max-w-sm leading-relaxed">
               Odaboo is the leading marketplace for professional services. 

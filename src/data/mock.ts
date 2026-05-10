@@ -52,7 +52,7 @@ export const SERVICES = [
     title: "IT Specialist",
     category: "Technology",
     price: "From $50/hr",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop",
+    image: "/s1.jpg",
     size: "large",
   },
   {
@@ -60,7 +60,7 @@ export const SERVICES = [
     title: "Electrical Repair",
     category: "Home Service",
     price: "From $40/hr",
-    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=400&auto=format&fit=crop",
+    image: "/s2.jpg",
     size: "medium",
   },
   {
@@ -68,7 +68,7 @@ export const SERVICES = [
     title: "Professional Painting",
     category: "Home Service",
     price: "From $35/hr",
-    image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=400&auto=format&fit=crop",
+    image: "/s3.jpg",
     size: "small",
   },
   {
@@ -76,7 +76,7 @@ export const SERVICES = [
     title: "Deep Cleaning",
     category: "Cleaning",
     price: "From $25/hr",
-    image: "https://images.unsplash.com/photo-1581578731522-9b7d7b89751f?q=80&w=400&auto=format&fit=crop",
+    image: "/s4.jpg",
     size: "small",
   },
 ];
