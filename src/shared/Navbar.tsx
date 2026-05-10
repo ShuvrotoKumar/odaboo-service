@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { 
-  Search, 
-  Menu, 
-  X, 
+import {
+  Search,
+  Menu,
+  X,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/Container";
@@ -52,12 +52,12 @@ export const Navbar = () => {
                 {/* Circular Arrows (Simplified SVG representation) */}
                 <div className="absolute -top-3 -right-2 w-8 h-8 pointer-events-none">
                   <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-[#FBBF24] animate-spin-slow">
-                    <path d="M12 2C6.48 2 2 6.48 2 12C2 13.59 2.37 15.09 3.04 16.42L5.47 14.71C5.17 13.88 5 12.97 5 12C5 8.13 8.13 5 12 5V2ZM18.53 7.29L16.1 9C16.4 9.83 16.57 10.74 16.57 11.67C16.57 15.54 13.44 18.67 9.57 18.67V21.67C15.09 21.67 19.57 17.19 19.57 11.67C19.57 10.08 19.2 8.58 18.53 7.25L18.53 7.29Z" fill="currentColor"/>
+                    <path d="M12 2C6.48 2 2 6.48 2 12C2 13.59 2.37 15.09 3.04 16.42L5.47 14.71C5.17 13.88 5 12.97 5 12C5 8.13 8.13 5 12 5V2ZM18.53 7.29L16.1 9C16.4 9.83 16.57 10.74 16.57 11.67C16.57 15.54 13.44 18.67 9.57 18.67V21.67C15.09 21.67 19.57 17.19 19.57 11.67C19.57 10.08 19.2 8.58 18.53 7.25L18.53 7.29Z" fill="currentColor" />
                   </svg>
                 </div>
                 <div className="absolute -bottom-3 -left-2 w-8 h-8 pointer-events-none rotate-180">
                   <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-[#FBBF24] animate-spin-slow-reverse">
-                    <path d="M12 2C6.48 2 2 6.48 2 12C2 13.59 2.37 15.09 3.04 16.42L5.47 14.71C5.17 13.88 5 12.97 5 12C5 8.13 8.13 5 12 5V2ZM18.53 7.29L16.1 9C16.4 9.83 16.57 10.74 16.57 11.67C16.57 15.54 13.44 18.67 9.57 18.67V21.67C15.09 21.67 19.57 17.19 19.57 11.67C19.57 10.08 19.2 8.58 18.53 7.25L18.53 7.29Z" fill="currentColor"/>
+                    <path d="M12 2C6.48 2 2 6.48 2 12C2 13.59 2.37 15.09 3.04 16.42L5.47 14.71C5.17 13.88 5 12.97 5 12C5 8.13 8.13 5 12 5V2ZM18.53 7.29L16.1 9C16.4 9.83 16.57 10.74 16.57 11.67C16.57 15.54 13.44 18.67 9.57 18.67V21.67C15.09 21.67 19.57 17.19 19.57 11.67C19.57 10.08 19.2 8.58 18.53 7.25L18.53 7.29Z" fill="currentColor" />
                   </svg>
                 </div>
               </span>
@@ -92,20 +92,20 @@ export const Navbar = () => {
             {isLoggedIn ? (
               <div className="flex items-center gap-4">
                 {/* Avatar with circle border */}
-                <div 
+                <div
                   className="w-10 h-10 rounded-full border-2 border-[#24B8C1] p-0.5 cursor-pointer overflow-hidden"
                   onClick={() => setIsLoggedIn(false)} // Toggle back for demo
                 >
-                  <Image 
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop" 
+                  <Image
+                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop"
                     alt="Profile"
                     width={40}
                     height={40}
                     className="w-full h-full object-cover rounded-full"
                   />
                 </div>
-                <PrimaryButton 
-                  size="sm" 
+                <PrimaryButton
+                  size="sm"
                   className="bg-[#24B8C1] hover:bg-[#1e9ba3] rounded-md px-6 font-semibold"
                 >
                   Posten Sie Ihren Bedarf
@@ -113,14 +113,14 @@ export const Navbar = () => {
               </div>
             ) : (
               <div className="flex items-center gap-3">
-                <button 
+                <button
                   className="text-sm font-bold text-slate-700 hover:text-primary transition-colors"
                   onClick={() => setIsLoggedIn(true)} // Toggle for demo
                 >
                   Login
                 </button>
-                <PrimaryButton 
-                  size="sm" 
+                <PrimaryButton
+                  size="sm"
                   className="bg-primary hover:bg-primary-hover rounded-full px-6"
                 >
                   Sign Up

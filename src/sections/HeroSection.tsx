@@ -6,7 +6,7 @@ import { PrimaryButton } from "@/components/PrimaryButton";
 
 export const HeroSection = () => {
   return (
-    <section className="relative pt-32 pb-10 lg:pt-40 lg:pb-16 overflow-hidden">
+    <section className="relative pt-32 pb-10 lg:pt-40 lg:pb-16 overflow-hidden bg-white">
       <Container>
         <div className="text-center max-w-4xl mx-auto">
           <motion.h1

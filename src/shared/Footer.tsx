@@ -37,7 +37,7 @@ const FOOTER_LINKS = [
 
 export const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-slate-900 pt-20 pb-10 border-t border-slate-100 dark:border-slate-800">
+    <footer className="bg-white pt-20 pb-10 border-t border-slate-100">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
           {/* Logo & Info */}

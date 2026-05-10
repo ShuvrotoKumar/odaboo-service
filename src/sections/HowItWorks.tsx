@@ -14,7 +14,7 @@ const ICON_MAP = {
 
 export const HowItWorks = () => {
   return (
-    <section className="py-24 bg-white dark:bg-slate-900">
+    <section className="py-24 bg-white">
       <Container>
         <SectionTitle 
           title="How It Works" 
