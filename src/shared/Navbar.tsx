@@ -37,8 +37,10 @@ export const Navbar = () => {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled ? "py-2 shadow-sm" : "bg-white py-4"
+        "fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out",
+        isScrolled 
+          ? "top-4 mx-auto w-[94%] max-w-[1400px] rounded-[24px] py-5 shadow-2xl" 
+          : "top-0 w-full bg-white py-4 shadow-sm"
       )}
       style={isScrolled ? { backgroundColor: "#0f2020" } : {}}
     >
