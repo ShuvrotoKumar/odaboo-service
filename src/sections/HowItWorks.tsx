@@ -339,9 +339,10 @@ export const HowItWorks = () => {
                 onMouseEnter={() => setActiveId(step.id)}
                 className="relative bg-white border border-gray-200 rounded-2xl p-7 flex flex-col overflow-hidden cursor-pointer min-w-0"
                 style={{
-                  flex: isActive ? "2.4 2.4 0%" : "1 1 0%",
-                  transition: "flex 0.45s cubic-bezier(0.4, 0, 0.2, 1)",
+                  flexGrow: isActive ? 2.4 : 1,
                   flexShrink: 0,
+                  flexBasis: "0%",
+                  transition: "flex-grow 0.45s cubic-bezier(0.4, 0, 0.2, 1)",
                 }}
               >
                 <h3 className="text-xl font-bold text-slate-900 mb-3 whitespace-nowrap flex-shrink-0">

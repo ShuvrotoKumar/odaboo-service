@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+
 
 // ── Icons ──────────────────────────────────────────────────────────────────
 const LinkedInIcon = () => (
@@ -37,21 +39,18 @@ const MailIcon = () => (
 
 // ── Logo ───────────────────────────────────────────────────────────────────
 const OdabooLogo = ({ light = false }: { light?: boolean }) => (
-  <div style={{ display: "flex", alignItems: "center", gap: "1px" }}>
-    {["o", "d", "a"].map((l, i) => (
-      <span key={i} style={{ fontSize: "20px", fontWeight: 800, color: light ? "#fff" : "#1a2e2e", fontFamily: "Georgia, serif" }}>{l}</span>
-    ))}
-    <span style={{ fontSize: "20px", fontWeight: 800, color: "#f5a623", fontFamily: "Georgia, serif" }}>b</span>
-    <span style={{ fontSize: "20px", fontWeight: 800, color: "#4ab5e8", fontFamily: "Georgia, serif" }}>o</span>
-    <span style={{ fontSize: "20px", fontWeight: 800, color: light ? "#fff" : "#1a2e2e", fontFamily: "Georgia, serif" }}>o</span>
-    <svg width="20" height="20" viewBox="0 0 40 40" style={{ marginLeft: "2px" }}>
-      <path d="M20 8 A12 12 0 0 1 32 20" stroke="#f5a623" strokeWidth="3.5" fill="none" strokeLinecap="round" />
-      <polygon points="32,14 36,20 28,20" fill="#f5a623" />
-      <path d="M20 32 A12 12 0 0 1 8 20" stroke="#4ab5e8" strokeWidth="3.5" fill="none" strokeLinecap="round" />
-      <polygon points="8,26 4,20 12,20" fill="#4ab5e8" />
-    </svg>
+  <div className="flex items-center">
+    <Image
+      src="/Logo.png"
+      alt="Odaboo Logo"
+      width={120}
+      height={40}
+      className={light ? "brightness-0 invert" : ""}
+      style={{ objectFit: "contain" }}
+    />
   </div>
 );
+
 
 // ── Data ───────────────────────────────────────────────────────────────────
 const links = {
@@ -95,7 +94,6 @@ export const Footer = () => {
           gridTemplateColumns: "1.6fr 1fr 1fr 1fr",
           gap: "48px",
           paddingBottom: "48px",
-          borderBottom: "1px solid rgba(255,255,255,0.08)",
         }}>
 
           {/* Brand column */}

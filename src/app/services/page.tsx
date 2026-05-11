@@ -1,173 +1,227 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
 import { Search, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Navbar } from '@/shared/Navbar';
-import { Footer } from '@/shared/Footer';
 import { CTASection } from '@/sections/CTASection';
 import { Container } from '@/components/Container';
-import { PrimaryButton } from '@/components/PrimaryButton';
 import { SERVICES } from '@/data/mock';
 
 // Local components for better organization
 const SearchSection = ({ onSearch }: { onSearch: (term: string) => void }) => {
-  const [term, setTerm] = useState('');
-  return (
-    <section className="py-12 bg-white">
-      <Container>
-        <h1 className="text-4xl font-bold text-center mb-8 text-slate-900">Explore More Services</h1>
-        <div className="max-w-3xl mx-auto flex gap-0 shadow-lg rounded-lg overflow-hidden border border-slate-100">
-          <div className="relative flex-grow">
-            <input 
-              type="text" 
-              placeholder="Search Service" 
-              className="w-full px-6 py-4 outline-none text-slate-600"
-              value={term}
-              onChange={(e) => setTerm(e.target.value)}
-            />
-          </div>
-          <button 
-            onClick={() => onSearch(term)}
-            className="bg-[--color-primary] hover:bg-[--color-primary-hover] text-white px-8 py-4 font-semibold transition-colors flex items-center gap-2"
-          >
-            Search
-          </button>
-        </div>
-      </Container>
-    </section>
-  );
+    const [term, setTerm] = useState('');
+    return (
+        <section className="py-20 bg-white">
+            <Container>
+                <div className="text-center mb-12">
+                    <h1 className="text-5xl font-bold text-slate-900 mb-6 mt-20">Explore All Services</h1>
+                    <p className="text-slate-500 text-lg max-w-2xl mx-auto">
+                        Browse a wide range of professional services and find the right expert for your needs.
+                    </p>
+                </div>
+
+                <div className="max-w-4xl mx-auto p-4 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl border border-slate-50">
+                    <div className="flex flex-col md:flex-row gap-3">
+                        <div className="relative flex-grow">
+                            <input
+                                type="text"
+                                placeholder="Search Service"
+                                className="w-full px-6 py-4 outline-none text-slate-600 border border-slate-200 rounded-xl focus:border-purple-400 transition-colors"
+                                value={term}
+                                onChange={(e) => setTerm(e.target.value)}
+                            />
+                        </div>
+                        <button
+                            onClick={() => onSearch(term)}
+                            className="bg-purple-600 hover:bg-purple-700 text-white px-10 py-4 rounded-xl font-semibold transition-all shadow-lg shadow-purple-200 flex items-center justify-center gap-2"
+                        >
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </Container>
+        </section>
+    );
 };
 
 const ServiceCard = ({ service }: { service: any }) => (
-  <div className="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
-    <div className="relative h-48 w-full">
-      <Image 
-        src={service.image} 
-        alt={service.title} 
-        fill 
-        className="object-cover group-hover:scale-105 transition-transform duration-500"
-      />
+    <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+        <div className="relative h-56 w-full overflow-hidden">
+            <Image
+                src={service.image}
+                alt={service.title}
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-700"
+            />
+        </div>
+        <div className="p-6">
+            <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-purple-600 transition-colors">{service.title}</h3>
+            <p className="text-slate-500 text-sm mb-6 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                Anbieter insgesamt: {service.providers}
+            </p>
+            <div className="flex justify-end">
+                <button className="text-purple-600 border border-purple-500 px-6 py-2 rounded-lg text-sm font-semibold hover:bg-purple-50 hover:shadow-inner transition-all">
+                    Show all
+                </button>
+            </div>
+        </div>
     </div>
-    <div className="p-5">
-      <h3 className="text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
-      <p className="text-slate-500 text-sm mb-4">Anbieter insgesamt: 116</p>
-      <div className="flex justify-end">
-        <button className="text-cyan-500 border border-cyan-500 px-4 py-1.5 rounded text-sm font-medium hover:bg-cyan-50 transition-colors">
-          Alle anzeigen
-        </button>
-      </div>
-    </div>
-  </div>
 );
 
-const Sidebar = ({ categories, selectedCategories, onToggleCategory }: any) => (
-  <div className="w-full lg:w-64 flex-shrink-0">
-    <div className="border border-cyan-500 rounded p-2 mb-6 flex items-center justify-center gap-2 text-cyan-600">
-      <Filter className="w-4 h-4" />
-      <span className="font-medium">Filter</span>
-    </div>
+const Sidebar = ({ categories, selectedCategories, onToggleCategory, onApply }: any) => (
+    <div className="w-full lg:w-72 flex-shrink-0">
+        <button className="w-full border border-purple-600 rounded-xl p-3 mb-8 flex items-center justify-center gap-2 text-purple-600 font-bold hover:bg-purple-50 transition-colors">
+            <Filter className="w-5 h-5" />
+            <span>Filter</span>
+        </button>
 
-    <div className="border border-slate-200 rounded-lg p-6 bg-white">
-      <h4 className="text-cyan-500 font-semibold mb-4 text-sm tracking-wide">Filter by Services</h4>
-      <div className="space-y-3">
-        {categories.map((cat: string) => (
-          <label key={cat} className="flex items-center gap-3 cursor-pointer group">
-            <input 
-              type="checkbox" 
-              className="w-4 h-4 rounded border-slate-300 text-cyan-500 focus:ring-cyan-500"
-              checked={selectedCategories.includes(cat)}
-              onChange={() => onToggleCategory(cat)}
-            />
-            <span className="text-slate-600 text-sm group-hover:text-slate-900 transition-colors">{cat}</span>
-          </label>
-        ))}
-      </div>
-      <button className="w-full mt-8 py-2 border border-cyan-500 text-cyan-500 rounded text-sm font-medium hover:bg-cyan-50 transition-colors">
-        Apply filter
-      </button>
+        <div className="border border-slate-100 rounded-2xl p-8 bg-white shadow-sm">
+            <h4 className="text-purple-600 font-bold mb-6 text-xs uppercase tracking-widest">Filter by Services</h4>
+            <div className="space-y-4">
+                {categories.map((cat: string) => (
+                    <label key={cat} className="flex items-center gap-4 cursor-pointer group">
+                        <div className="relative flex items-center">
+                            <input
+                                type="checkbox"
+                                className="peer appearance-none w-5 h-5 rounded-md border-2 border-slate-200 checked:bg-purple-600 checked:border-purple-600 transition-all cursor-pointer"
+                                checked={selectedCategories.includes(cat)}
+                                onChange={() => onToggleCategory(cat)}
+                            />
+                            <svg className="absolute w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 pointer-events-none left-0.5 top-0.5 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="4">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <span className="text-slate-600 text-[15px] font-medium group-hover:text-slate-900 transition-colors">{cat}</span>
+                    </label>
+                ))}
+            </div>
+            <button
+                onClick={onApply}
+                className="w-full mt-10 py-3 border-2 border-purple-600 text-purple-600 rounded-xl text-sm font-bold hover:bg-purple-600 hover:text-white transition-all shadow-sm active:scale-95"
+            >
+                Apply filter
+            </button>
+        </div>
     </div>
-  </div>
 );
 
 const Pagination = () => (
-  <div className="flex justify-center items-center gap-2 mt-12 mb-8">
-    <button className="flex items-center gap-1 px-3 py-2 text-slate-400 hover:text-slate-600 text-xs">
-      <ChevronLeft className="w-4 h-4" /> Back
-    </button>
-    {[1, 2, 3, 4].map(n => (
-      <button key={n} className="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-600 text-xs hover:border-cyan-500 hover:text-cyan-500 transition-colors">
-        {n}
-      </button>
-    ))}
-    <button className="w-8 h-8 flex items-center justify-center rounded bg-cyan-500 text-white text-xs">5</button>
-    {[6, 7].map(n => (
-      <button key={n} className="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-600 text-xs hover:border-cyan-500 hover:text-cyan-500 transition-colors">
-        {n}
-      </button>
-    ))}
-    <span className="text-slate-400">...</span>
-    <button className="w-8 h-8 flex items-center justify-center rounded border border-slate-200 text-slate-600 text-xs hover:border-cyan-500 hover:text-cyan-500 transition-colors">17</button>
-    <button className="flex items-center gap-1 px-4 py-2 bg-cyan-500 text-white rounded text-xs ml-2 font-medium">
-      Next <ChevronRight className="w-4 h-4" />
-    </button>
-  </div>
+    <div className="flex justify-center items-center gap-2 mt-16 mb-8">
+        <button className="flex items-center gap-1 px-4 py-2 text-slate-400 hover:text-purple-600 transition-colors font-medium">
+            <ChevronLeft className="w-4 h-4" /> Back
+        </button>
+        <div className="flex gap-2">
+            {[1, 2, 3, 4].map(n => (
+                <button key={n} className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-600 font-semibold hover:border-purple-500 hover:text-purple-500 transition-all">
+                    {n}
+                </button>
+            ))}
+            <button className="w-10 h-10 flex items-center justify-center rounded-xl bg-purple-600 text-white font-bold shadow-lg shadow-purple-100">5</button>
+            {[6, 7].map(n => (
+                <button key={n} className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-600 font-semibold hover:border-purple-500 hover:text-purple-500 transition-all">
+                    {n}
+                </button>
+            ))}
+            <span className="flex items-end px-2 pb-2 text-slate-400 font-bold text-xl">...</span>
+            <button className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-600 font-semibold hover:border-purple-500 hover:text-purple-500 transition-all">17</button>
+        </div>
+        <button className="flex items-center gap-1 px-6 py-2.5 bg-purple-600 text-white rounded-xl shadow-lg shadow-purple-100 hover:bg-purple-600 transition-all font-bold ml-4">
+            Next <ChevronRight className="w-4 h-4" />
+        </button>
+    </div>
 );
 
 const ServicesPage = () => {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const categories = [
-    "Electrician", "Nurse", "Window cleaning", "Car Mechanic", 
-    "Personal Trainer", "Driving School", "Wedding Photographer", "Removal Transport"
-  ];
+    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+    const [appliedFilters, setAppliedFilters] = useState<string[]>([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
-  const handleToggleCategory = (category: string) => {
-    setSelectedCategories(prev => 
-      prev.includes(category) 
-        ? prev.filter(c => c !== category) 
-        : [...prev, category]
+    const categories = [
+        "Electrician", "Nurse", "Window cleaning", "Car Mechanic",
+        "Personal Trainer", "Driving School", "Wedding Photographer", "Removal Transport"
+    ];
+
+    const handleToggleCategory = (category: string) => {
+        setSelectedCategories(prev =>
+            prev.includes(category)
+                ? prev.filter(c => c !== category)
+                : [...prev, category]
+        );
+    };
+
+    const handleApplyFilters = () => {
+        setAppliedFilters(selectedCategories);
+    };
+
+    const handleSearch = (term: string) => {
+        setSearchTerm(term);
+    };
+
+    const filteredServices = useMemo(() => {
+        let results = SERVICES;
+
+        if (appliedFilters.length > 0) {
+            results = results.filter(service =>
+                appliedFilters.includes(service.serviceType || '')
+            );
+        }
+
+        if (searchTerm) {
+            const lowTerm = searchTerm.toLowerCase();
+            results = results.filter(service =>
+                service.title.toLowerCase().includes(lowTerm) ||
+                service.category.toLowerCase().includes(lowTerm)
+            );
+        }
+
+        return results;
+    }, [appliedFilters, searchTerm]);
+
+    return (
+        <div className="min-h-screen bg-white">
+            <main>
+                <SearchSection onSearch={handleSearch} />
+
+                <div className="bg-slate-50/50 py-20">
+                    <Container>
+                        <div className="flex flex-col lg:flex-row gap-12">
+                            <Sidebar
+                                categories={categories}
+                                selectedCategories={selectedCategories}
+                                onToggleCategory={handleToggleCategory}
+                                onApply={handleApplyFilters}
+                            />
+
+                            <div className="flex-grow">
+                                {filteredServices.length > 0 ? (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                        {filteredServices.map((service) => (
+                                            <ServiceCard key={service.id} service={service} />
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-300">
+                                        <p className="text-slate-400 text-lg">No services found matching your criteria.</p>
+                                        <button
+                                            onClick={() => { setSelectedCategories([]); setAppliedFilters([]); setSearchTerm(''); }}
+                                            className="mt-4 text-purple-600 font-bold hover:underline"
+                                        >
+                                            Clear all filters
+                                        </button>
+                                    </div>
+                                )}
+                                <Pagination />
+                            </div>
+                        </div>
+                    </Container>
+                </div>
+
+                <CTASection />
+            </main>
+        </div>
     );
-  };
-
-  const handleSearch = (term: string) => {
-    console.log("Searching for:", term);
-  };
-
-  // Duplicate services to fill the grid for demo
-  const displayServices = [...SERVICES, ...SERVICES].slice(0, 8);
-
-  return (
-    <div className="min-h-screen bg-slate-50">
-      <Navbar />
-      
-      <main>
-        <SearchSection onSearch={handleSearch} />
-
-        <Container className="py-12">
-          <div className="flex flex-col lg:flex-row gap-8">
-            <Sidebar 
-              categories={categories} 
-              selectedCategories={selectedCategories}
-              onToggleCategory={handleToggleCategory}
-            />
-
-            <div className="flex-grow">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {displayServices.map((service, idx) => (
-                  <ServiceCard key={idx} service={service} />
-                ))}
-              </div>
-              <Pagination />
-            </div>
-          </div>
-        </Container>
-
-        <CTASection />
-      </main>
-
-      <Footer />
-    </div>
-  );
 };
 
-export default ServicesPage;
+export default ServicesPage;
+
