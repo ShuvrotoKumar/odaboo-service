@@ -44,35 +44,35 @@ export const Navbar = () => {
       className={cn(
         "fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out",
         isScrolled
-          ? "top-0 w-full h-[70px] py-3 shadow-md bg-white"
-          : "top-0 w-full h-[70px] py-3 shadow-sm bg-transparent"
+          ? "top-0 w-full h-[85px] py-4 shadow-md bg-white"
+          : "top-0 w-full h-[85px] py-4 shadow-sm bg-transparent"
       )}
     >
       <Container>
         {/* Layout: Left (Logo + Nav) | Right (Actions) */}
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center justify-between gap-4 h-full">
 
           {/* ── Left side: Logo & Nav Links ── */}
-          <div className="flex items-center gap-40">
+          <div className="flex items-center gap-30">
             {/* Logo */}
             <Link href="/" className="flex items-center shrink-0">
               <Image
                 src="/Logo.png"
                 alt="Odaboo Logo"
-                width={150}
-                height={50}
-                className="h-10 w-auto object-contain transition-all duration-300"
+                width={160}
+                height={55}
+                className="h-11 w-auto object-contain transition-all duration-300"
                 priority
               />
             </Link>
 
             {/* Nav Links */}
-            <div className="hidden xl:flex items-center gap-8">
+            <div className="hidden xl:flex items-center gap-10">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-sm font-bold transition-colors whitespace-nowrap text-slate-700 hover:text-primary tracking-wide"
+                  className="text-[15px] font-[800] transition-colors whitespace-nowrap text-slate-800 hover:text-primary tracking-tight"
                 >
                   {link.name}
                 </Link>
@@ -81,49 +81,47 @@ export const Navbar = () => {
           </div>
 
           {/* ── Right: Search + Auth ── */}
-          <div className="hidden lg:flex items-center gap-3 shrink-0">
-            {/* Search Pill — slightly smaller */}
+          <div className="hidden lg:flex items-center gap-4 shrink-0">
+            {/* Search Pill — slightly larger */}
             <div className="relative group">
               <input
                 type="text"
                 placeholder="Search..."
-                className="h-9 w-48 pl-8 pr-3 rounded-full text-xs outline-none transition-all shadow-sm bg-white border border-purple-100 text-slate-900 placeholder:text-slate-400 focus:border-primary"
+                className="h-11 w-56 pl-10 pr-4 rounded-full text-sm outline-none transition-all shadow-sm bg-slate-50 border border-slate-100 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:bg-white"
               />
-              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors text-purple-600" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors text-slate-400 group-focus-within:text-primary" />
             </div>
 
             {isLoggedIn ? (
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 <div
-                  className="w-9 h-9 rounded-full border-2 p-0.5 cursor-pointer overflow-hidden transition-colors border-[#24B8C1]"
+                  className="w-10 h-10 rounded-full border-2 p-0.5 cursor-pointer overflow-hidden transition-colors border-primary"
                   onClick={() => setIsLoggedIn(false)}
                 >
                   <Image
                     src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop"
                     alt="Profile"
-                    width={36}
-                    height={36}
+                    width={40}
+                    height={40}
                     className="w-full h-full object-cover rounded-full"
                   />
                 </div>
                 <PrimaryButton
-                  size="sm"
-                  className="rounded-md px-5 text-xs font-semibold transition-all bg-[#24B8C1] hover:bg-[#1e9ba3] text-white"
+                  className="rounded-xl px-6 py-2.5 text-sm font-bold transition-all bg-primary hover:bg-primary-hover text-white shadow-lg shadow-primary/20"
                 >
                   Post Your Need
                 </PrimaryButton>
               </div>
             ) : (
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 <button
-                  className="text-sm font-bold transition-colors text-slate-700 hover:text-primary"
+                  className="text-[15px] font-extrabold transition-colors text-slate-800 hover:text-primary"
                   onClick={() => router.push("/auth/login")}
                 >
                   Login
                 </button>
                 <PrimaryButton
-                  size="sm"
-                  className="rounded-full px-5 transition-all bg-primary hover:bg-primary-hover text-white"
+                  className="rounded-full px-8 py-2.5 text-sm font-bold transition-all bg-primary hover:bg-primary-hover text-white shadow-lg shadow-primary/20"
                   onClick={() => router.push("/auth/confirm_auth")}
                 >
                   Sign Up
@@ -167,12 +165,12 @@ export const Navbar = () => {
               </button>
             </div>
 
-            <div className="flex flex-col gap-6 mb-8">
+            <div className="flex flex-col gap-8 mb-10">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-xl font-medium text-slate-900"
+                  className="text-2xl font-[900] text-slate-900 hover:text-primary transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
