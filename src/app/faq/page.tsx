@@ -85,7 +85,7 @@ export default function FAQPage() {
                             </div>
                             <input
                                 type="text"
-                                className="block w-full pl-12 pr-4 py-4 rounded-full border-slate-200 shadow-sm text-slate-900 focus:ring-2 focus:ring-#1eb9c7-600 focus:border-#1eb9c7-600 transition-all outline-none"
+                                className="block w-full pl-12 pr-4 py-4 rounded-full border-slate-200 shadow-sm text-slate-900 focus:ring-2 focus:ring-purple-600 focus:border-purple-600 transition-all outline-none"
                                 placeholder="Search for articles..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -111,7 +111,7 @@ export default function FAQPage() {
                                 className={cn(
                                     "px-6 py-2.5 rounded-full text-sm font-semibold transition-all",
                                     activeCategory === category
-                                        ? "bg-#1eb9c7-600 text-white shadow-md shadow-#1eb9c7-600/20"
+                                        ? "bg-purple-600 text-white shadow-md shadow-purple-600/20"
                                         : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
                                 )}
                             >
@@ -135,7 +135,7 @@ export default function FAQPage() {
                                             transition={{ duration: 0.3 }}
                                             className={cn(
                                                 "border rounded-2xl overflow-hidden transition-colors",
-                                                isOpen ? "bg-white border-#1eb9c7-200 shadow-sm" : "bg-white border-slate-200 hover:border-#1eb9c7-200"
+                                                isOpen ? "bg-white border-purple-200 shadow-sm" : "bg-white border-slate-200 hover:border-purple-200"
                                             )}
                                         >
                                             <button
@@ -145,7 +145,7 @@ export default function FAQPage() {
                                                 <span className="text-lg font-bold text-slate-900 pr-8">{faq.question}</span>
                                                 <motion.div
                                                     animate={{ rotate: isOpen ? 180 : 0 }}
-                                                    className={cn("shrink-0", isOpen ? "text-#1eb9c7-600" : "text-slate-400")}
+                                                    className={cn("shrink-0", isOpen ? "text-purple-600" : "text-slate-400")}
                                                 >
                                                     <ChevronDown className="w-5 h-5" />
                                                 </motion.div>
@@ -178,7 +178,7 @@ export default function FAQPage() {
                                     <p className="text-slate-500">We couldn't find any FAQs matching "{searchQuery}".</p>
                                     <button
                                         onClick={() => setSearchQuery("")}
-                                        className="mt-6 text-#1eb9c7-600 font-bold hover:underline"
+                                        className="mt-6 text-purple-600 font-bold hover:underline"
                                     >
                                         Clear search
                                     </button>

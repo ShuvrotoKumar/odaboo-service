@@ -25,11 +25,11 @@ export default function CookiesPage() {
 
             {/* Hero Section */}
             <section className="relative pt-16 pb-20 bg-white">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-#1eb9c7-600/5 blur-[120px] rounded-full pointer-events-none" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-600/5 blur-[120px] rounded-full pointer-events-none" />
 
                 <Container className="relative z-10 text-center max-w-3xl">
                     <motion.div initial="hidden" animate="visible" variants={staggerContainer}>
-                        <motion.div variants={fadeInUp} className="inline-flex items-center justify-center p-3 bg-#1eb9c7-50 text-#1eb9c7-600 rounded-2xl mb-6">
+                        <motion.div variants={fadeInUp} className="inline-flex items-center justify-center p-3 bg-purple-50 text-purple-600 rounded-2xl mb-6">
                             <Cookie className="w-8 h-8" />
                         </motion.div>
                         <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight">
@@ -74,7 +74,7 @@ export default function CookiesPage() {
                         {/* Section 2 */}
                         <motion.div variants={fadeInUp} className="mb-12">
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-12 h-12 rounded-full bg-#1eb9c7-50 flex items-center justify-center text-#1eb9c7-600 shrink-0">
+                                <div className="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 shrink-0">
                                     <Settings className="w-6 h-6" />
                                 </div>
                                 <h2 className="text-2xl md:text-3xl font-bold text-slate-900">How We Use Cookies</h2>
@@ -118,15 +118,15 @@ export default function CookiesPage() {
                                 </p>
                                 <ul className="space-y-4">
                                     <li className="flex items-start gap-3 text-slate-600">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-#1eb9c7-600 mt-2 shrink-0" />
+                                        <span className="w-1.5 h-1.5 rounded-full bg-purple-600 mt-2 shrink-0" />
                                         <span><strong>Cookie Settings:</strong> Manage your preferences directly on our website using the cookie consent banner.</span>
                                     </li>
                                     <li className="flex items-start gap-3 text-slate-600">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-#1eb9c7-600 mt-2 shrink-0" />
+                                        <span className="w-1.5 h-1.5 rounded-full bg-purple-600 mt-2 shrink-0" />
                                         <span><strong>Browser Settings:</strong> Most web browsers allow you to control cookies through their settings (e.g., Chrome, Safari, Firefox).</span>
                                     </li>
                                     <li className="flex items-start gap-3 text-slate-600">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-#1eb9c7-600 mt-2 shrink-0" />
+                                        <span className="w-1.5 h-1.5 rounded-full bg-purple-600 mt-2 shrink-0" />
                                         <span><strong>Third-Party Tools:</strong> Various industry tools are available for opting out of certain types of marketing cookies.</span>
                                     </li>
                                 </ul>

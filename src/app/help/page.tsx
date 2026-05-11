@@ -32,7 +32,7 @@ const HELP_TOPICS = [
         title: "Account Settings",
         description: "Manage your profile details, notifications, password, and security settings.",
         icon: User,
-        color: "bg-#1eb9c7-50 text-#1eb9c7-600",
+        color: "bg-purple-50 text-purple-600",
         href: "/faq"
     },
     {

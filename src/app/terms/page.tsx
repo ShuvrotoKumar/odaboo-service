@@ -61,7 +61,7 @@ export default function TermsPage() {
                         {/* Section 1 */}
                         <motion.div variants={fadeInUp} className="mb-12">
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-12 h-12 rounded-full bg-#1eb9c7-50 flex items-center justify-center text-#1eb9c7-600 shrink-0">
+                                <div className="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 shrink-0">
                                     <Scale className="w-6 h-6" />
                                 </div>
                                 <h2 className="text-2xl md:text-3xl font-bold text-slate-900">1. Acceptance of Terms</h2>

@@ -39,7 +39,7 @@ export default function AboutUsPage() {
       {/* --- 1. Hero Section --- */}
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-slate-50">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-#1eb9c7-200/40 blur-3xl" />
+          <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-purple-200/40 blur-3xl" />
           <div className="absolute -bottom-[20%] -left-[10%] w-[40%] h-[40%] rounded-full bg-cyan-100/40 blur-3xl" />
         </div>
         <Container className="relative z-10 text-center">
@@ -81,7 +81,7 @@ export default function AboutUsPage() {
               variants={slideInLeft}
               className="space-y-8"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-#1eb9c7-100 text-#1eb9c7-600 mb-2">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-purple-100 text-purple-600 mb-2">
                 <Target className="w-8 h-8" />
               </div>
               <h2 className="text-4xl font-bold text-slate-900">Our Mission</h2>
@@ -105,7 +105,7 @@ export default function AboutUsPage() {
               variants={slideInRight}
               className="relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-#1eb9c7-100 to-cyan-50 rounded-3xl transform rotate-3" />
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-100 to-cyan-50 rounded-3xl transform rotate-3" />
               <div className="relative bg-white border border-slate-100 p-10 lg:p-12 rounded-3xl shadow-[0_20px_50px_rgb(0,0,0,0.05)]">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-cyan-100 text-cyan-600 mb-8">
                   <Eye className="w-8 h-8" />
@@ -181,7 +181,7 @@ export default function AboutUsPage() {
                 variants={fadeInUp}
                 className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-shadow duration-300 group"
               >
-                <div className="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center text-slate-600 group-hover:bg-#1eb9c7-600 group-hover:text-primary transition-colors duration-300 mb-6">
+                <div className="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center text-slate-600 group-hover:bg-purple-600 group-hover:text-primary transition-colors duration-300 mb-6">
                   <value.icon className="w-7 h-7" />
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-3">{value.title}</h3>

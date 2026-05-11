@@ -183,7 +183,7 @@ export const Navbar = () => {
             <div className="mt-auto flex flex-col gap-4">
               {isLoggedIn ? (
                 <>
-                  <PrimaryButton className="w-full bg-[#24B8C1]">Post Your Need</PrimaryButton>
+                  <PrimaryButton className="w-full bg-primary">Post Your Need</PrimaryButton>
                   <button className="text-slate-600 font-medium" onClick={() => setIsLoggedIn(false)}>Logout</button>
                 </>
               ) : (

@@ -79,7 +79,7 @@ export default function SubscriptionPage() {
 
             {/* --- 1. Hero Section --- */}
             <section className="relative pt-32 pb-16 lg:pt-40 lg:pb-24 bg-white overflow-hidden">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-#1eb9c7-600/5 blur-[120px] rounded-full pointer-events-none" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-600/5 blur-[120px] rounded-full pointer-events-none" />
 
                 <Container className="relative z-10 text-center">
                     <motion.div
@@ -99,7 +99,7 @@ export default function SubscriptionPage() {
                             className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight"
                         >
                             Simple, transparent <br className="hidden sm:block" />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-#1eb9c7-600 to-cyan-500">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-purple-600">
                                 pricing for everyone
                             </span>
                         </motion.h1>
@@ -116,7 +116,7 @@ export default function SubscriptionPage() {
                             <button
                                 onClick={() => setIsAnnual(!isAnnual)}
                                 className="relative w-16 h-8 rounded-full bg-slate-200 flex items-center p-1 cursor-pointer transition-colors"
-                                style={{ backgroundColor: isAnnual ? '#9333ea' : '#e2e8f0' }} // #1eb9c7-600
+                                style={{ backgroundColor: isAnnual ? '#1eb9c7' : '#e2e8f0' }} // purple-600
                             >
                                 <motion.div
                                     className="w-6 h-6 bg-white rounded-full shadow-sm"
@@ -151,13 +151,13 @@ export default function SubscriptionPage() {
                                 className={cn(
                                     "relative bg-white rounded-3xl p-8 border transition-all duration-300 hover:shadow-2xl",
                                     plan.isPopular
-                                        ? "border-#1eb9c7-500 shadow-xl shadow-#1eb9c7-500/10 md:-translate-y-4"
+                                        ? "border-purple-500 shadow-xl shadow-purple-500/10 md:-translate-y-4"
                                         : "border-slate-200 shadow-sm"
                                 )}
                             >
                                 {plan.isPopular && (
                                     <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                        <span className="bg-gradient-to-r from-#1eb9c7-600 to-cyan-500 text-white text-xs font-bold uppercase tracking-widest py-1.5 px-4 rounded-full shadow-lg">
+                                        <span className="bg-gradient-to-r from-purple-600 to-cyan-500 text-white text-xs font-bold uppercase tracking-widest py-1.5 px-4 rounded-full shadow-lg">
                                             Most Popular
                                         </span>
                                     </div>
@@ -165,7 +165,7 @@ export default function SubscriptionPage() {
 
                                 <div className="flex items-center justify-between mb-4">
                                     <h3 className="text-2xl font-bold text-slate-900">{plan.name}</h3>
-                                    <plan.icon className={cn("w-6 h-6", plan.isPopular ? "text-#1eb9c7-600" : "text-slate-400")} />
+                                    <plan.icon className={cn("w-6 h-6", plan.isPopular ? "text-purple-600" : "text-slate-400")} />
                                 </div>
 
                                 <p className="text-slate-500 text-sm mb-6 h-10">{plan.description}</p>
@@ -188,7 +188,7 @@ export default function SubscriptionPage() {
                                     className={cn(
                                         "w-full py-3.5 rounded-xl font-bold text-sm transition-all shadow-sm active:scale-95 mb-8",
                                         plan.isPopular
-                                            ? "bg-#1eb9c7-600 hover:bg-#1eb9c7-700 text-white shadow-#1eb9c7-600/25"
+                                            ? "bg-purple-600 hover:bg-purple-700 text-white shadow-purple-600/25"
                                             : "bg-slate-50 hover:bg-slate-100 text-slate-900 border border-slate-200"
                                     )}
                                 >
@@ -279,7 +279,7 @@ export default function SubscriptionPage() {
                                     <motion.div
                                         key={idx}
                                         variants={fadeInUp}
-                                        className="border border-slate-200 rounded-2xl overflow-hidden bg-white hover:border-#1eb9c7-200 transition-colors"
+                                        className="border border-slate-200 rounded-2xl overflow-hidden bg-white hover:border-purple-200 transition-colors"
                                     >
                                         <button
                                             onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
@@ -288,7 +288,7 @@ export default function SubscriptionPage() {
                                             <span className="text-lg font-bold text-slate-900 pr-8">{faq.question}</span>
                                             <motion.div
                                                 animate={{ rotate: isOpen ? 180 : 0 }}
-                                                className={cn("shrink-0", isOpen ? "text-#1eb9c7-600" : "text-slate-400")}
+                                                className={cn("shrink-0", isOpen ? "text-purple-600" : "text-slate-400")}
                                             >
                                                 <ChevronDown className="w-5 h-5" />
                                             </motion.div>

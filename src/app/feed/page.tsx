@@ -89,7 +89,7 @@ export default function FeedPage() {
                             className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200"
                         >
                             <div className="flex gap-4">
-                                <div className="w-10 h-10 rounded-full bg-#1eb9c7-100 text-#1eb9c7-700 flex items-center justify-center font-bold shrink-0">
+                                <div className="w-10 h-10 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center font-bold shrink-0">
                                     ME
                                 </div>
                                 <div className="flex-grow">
@@ -97,10 +97,10 @@ export default function FeedPage() {
                                         value={newPost}
                                         onChange={(e) => setNewPost(e.target.value)}
                                         placeholder="Ask for recommendations or share an update..."
-                                        className="w-full bg-slate-50 rounded-xl border-none p-4 text-slate-900 focus:ring-2 focus:ring-#1eb9c7-600 focus:bg-white transition-all resize-none min-h-[100px]"
+                                        className="w-full bg-slate-50 rounded-xl border-none p-4 text-slate-900 focus:ring-2 focus:ring-purple-600 focus:bg-white transition-all resize-none min-h-[100px]"
                                     />
                                     <div className="flex items-center justify-between mt-4">
-                                        <button className="flex items-center gap-2 text-slate-500 hover:text-#1eb9c7-600 transition-colors px-3 py-2 rounded-lg hover:bg-#1eb9c7-50">
+                                        <button className="flex items-center gap-2 text-slate-500 hover:text-purple-600 transition-colors px-3 py-2 rounded-lg hover:bg-purple-50">
                                             <ImageIcon className="w-5 h-5" />
                                             <span className="text-sm font-medium">Photo</span>
                                         </button>
@@ -108,7 +108,7 @@ export default function FeedPage() {
                                             className={cn(
                                                 "flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm transition-all",
                                                 newPost.length > 0
-                                                    ? "bg-#1eb9c7-600 text-white shadow-md shadow-#1eb9c7-600/20 hover:bg-#1eb9c7-700"
+                                                    ? "bg-purple-600 text-white shadow-md shadow-purple-600/20 hover:bg-purple-700"
                                                     : "bg-slate-100 text-slate-400 cursor-not-allowed"
                                             )}
                                         >
@@ -130,7 +130,7 @@ export default function FeedPage() {
                                 {/* Post Header */}
                                 <div className="flex items-center justify-between mb-4">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-100 to-#1eb9c7-100 text-slate-700 flex items-center justify-center font-bold text-lg">
+                                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-100 to-purple-100 text-slate-700 flex items-center justify-center font-bold text-lg">
                                             {post.author.avatar}
                                         </div>
                                         <div>
@@ -138,7 +138,7 @@ export default function FeedPage() {
                                             <div className="flex items-center gap-2 text-xs text-slate-500">
                                                 <span className={cn(
                                                     "font-medium",
-                                                    post.author.role.includes("Pro") ? "text-#1eb9c7-600" : ""
+                                                    post.author.role.includes("Pro") ? "text-purple-600" : ""
                                                 )}>
                                                     {post.author.role}
                                                 </span>
@@ -170,7 +170,7 @@ export default function FeedPage() {
                                         <MessageCircle className="w-5 h-5" />
                                         <span>{post.comments}</span>
                                     </button>
-                                    <button className="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-#1eb9c7-600 transition-colors ml-auto">
+                                    <button className="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-purple-600 transition-colors ml-auto">
                                         <Share2 className="w-5 h-5" />
                                         <span className="hidden sm:inline">Share</span>
                                     </button>
