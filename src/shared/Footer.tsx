@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-
-
+import Link from "next/link";
 // ── Icons ──────────────────────────────────────────────────────────────────
 const LinkedInIcon = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
@@ -162,8 +161,14 @@ export const Footer = () => {
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "11px" }}>
                 {items.map(item => (
                   <li key={item}>
-                    <a
-                      href="#"
+                    <Link
+                      href={
+                        item === "FAQ" ? "/faq" : 
+                        item === "About Us" ? "/about" : 
+                        item === "Terms of Service" ? "/terms" : 
+                        item === "Privacy Policy" ? "/privacy" : 
+                        "#"
+                      }
                       style={{
                         fontSize: "13.5px",
                         color: "rgba(255,255,255,0.5)",
@@ -174,7 +179,7 @@ export const Footer = () => {
                       onMouseOut={e => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
                     >
                       {item}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -279,7 +284,12 @@ export const Footer = () => {
           </p>
           <div style={{ display: "flex", gap: "24px" }}>
             {["Privacy", "Terms", "Cookies"].map(item => (
-              <a key={item} href="#" style={{
+              <Link key={item} href={
+                item === "Cookies" ? "/cookies" : 
+                item === "Terms" ? "/terms" : 
+                item === "Privacy" ? "/privacy" : 
+                "#"
+              } style={{
                 fontSize: "12px",
                 color: "rgba(255,255,255,0.3)",
                 textDecoration: "none",
@@ -288,7 +298,7 @@ export const Footer = () => {
                 onMouseOver={e => (e.currentTarget.style.color = "rgba(255,255,255,0.7)")}
                 onMouseOut={e => (e.currentTarget.style.color = "rgba(255,255,255,0.3)")}>
                 {item}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
