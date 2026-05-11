@@ -39,46 +39,40 @@ export const Navbar = () => {
       className={cn(
         "fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out",
         isScrolled
-          ? "top-4 mx-auto w-[94%] max-w-[1400px] rounded-[24px] py-5 shadow-2xl"
-          : "top-0 w-full bg-white py-4 shadow-sm"
+          ? "top-0 w-full h-[70px] py-3 shadow-md bg-white"
+          : "top-0 w-full h-[70px] py-3 shadow-sm bg-transparent"
       )}
-      style={isScrolled ? { backgroundColor: "#0f2020" } : {}}
     >
       <Container>
-        {/* 3-column grid: Logo | Nav (center) | Actions */}
+        {/* Layout: Left (Logo + Nav) | Right (Actions) */}
         <div className="flex items-center justify-between gap-4">
 
-          {/* ── Left: Logo ── */}
-          <Link href="/" className="flex items-center shrink-0">
-            <Image
-              src="/Logo.png"
-              alt="Odaboo Logo"
-              width={150}
-              height={50}
-              className={cn(
-                "h-10 w-auto object-contain transition-all duration-300",
-                isScrolled && "brightness-0 invert"
-              )}
-              priority
-            />
-          </Link>
+          {/* ── Left side: Logo & Nav Links ── */}
+          <div className="flex items-center gap-40">
+            {/* Logo */}
+            <Link href="/" className="flex items-center shrink-0">
+              <Image
+                src="/Logo.png"
+                alt="Odaboo Logo"
+                width={150}
+                height={50}
+                className="h-10 w-auto object-contain transition-all duration-300"
+                priority
+              />
+            </Link>
 
-          {/* ── Center: Nav Links (absolutely centered) ── */}
-          <div className="hidden xl:flex items-center justify-center gap-6 absolute left-1/2 -translate-x-1/2">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={cn(
-                  "text-sm font-semibold transition-colors whitespace-nowrap",
-                  isScrolled
-                    ? "text-white/80 hover:text-white"
-                    : "text-slate-700 hover:text-primary"
-                )}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {/* Nav Links */}
+            <div className="hidden xl:flex items-center gap-8">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-sm font-bold transition-colors whitespace-nowrap text-slate-700 hover:text-primary tracking-wide"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* ── Right: Search + Auth ── */}
@@ -88,26 +82,15 @@ export const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search..."
-                className={cn(
-                  "h-9 w-48 pl-8 pr-3 rounded-full text-xs outline-none transition-all shadow-sm",
-                  isScrolled
-                    ? "bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:border-white/40"
-                    : "bg-white border border-purple-100 text-slate-900 placeholder:text-slate-400 focus:border-primary"
-                )}
+                className="h-9 w-48 pl-8 pr-3 rounded-full text-xs outline-none transition-all shadow-sm bg-white border border-purple-100 text-slate-900 placeholder:text-slate-400 focus:border-primary"
               />
-              <Search className={cn(
-                "absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors",
-                isScrolled ? "text-white/60" : "text-[#24B8C1]"
-              )} />
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors text-[#24B8C1]" />
             </div>
 
             {isLoggedIn ? (
               <div className="flex items-center gap-3">
                 <div
-                  className={cn(
-                    "w-9 h-9 rounded-full border-2 p-0.5 cursor-pointer overflow-hidden transition-colors",
-                    isScrolled ? "border-white/20" : "border-[#24B8C1]"
-                  )}
+                  className="w-9 h-9 rounded-full border-2 p-0.5 cursor-pointer overflow-hidden transition-colors border-[#24B8C1]"
                   onClick={() => setIsLoggedIn(false)}
                 >
                   <Image
@@ -120,12 +103,7 @@ export const Navbar = () => {
                 </div>
                 <PrimaryButton
                   size="sm"
-                  className={cn(
-                    "rounded-md px-5 text-xs font-semibold transition-all",
-                    isScrolled
-                      ? "bg-white text-[#0f2020] hover:bg-white/90"
-                      : "bg-[#24B8C1] hover:bg-[#1e9ba3] text-white"
-                  )}
+                  className="rounded-md px-5 text-xs font-semibold transition-all bg-[#24B8C1] hover:bg-[#1e9ba3] text-white"
                 >
                   Post Your Need
                 </PrimaryButton>
@@ -133,22 +111,14 @@ export const Navbar = () => {
             ) : (
               <div className="flex items-center gap-3">
                 <button
-                  className={cn(
-                    "text-sm font-bold transition-colors",
-                    isScrolled ? "text-white/80 hover:text-white" : "text-slate-700 hover:text-primary"
-                  )}
+                  className="text-sm font-bold transition-colors text-slate-700 hover:text-primary"
                   onClick={() => setIsLoggedIn(true)}
                 >
                   Login
                 </button>
                 <PrimaryButton
                   size="sm"
-                  className={cn(
-                    "rounded-full px-5 transition-all",
-                    isScrolled
-                      ? "bg-white text-[#0f2020] hover:bg-white/90 shadow-none"
-                      : "bg-primary hover:bg-primary-hover text-white"
-                  )}
+                  className="rounded-full px-5 transition-all bg-primary hover:bg-primary-hover text-white"
                 >
                   Sign Up
                 </PrimaryButton>
@@ -158,10 +128,7 @@ export const Navbar = () => {
 
           {/* Mobile Menu Toggle */}
           <button
-            className={cn(
-              "lg:hidden p-2 transition-colors",
-              isScrolled ? "text-white" : "text-slate-900"
-            )}
+            className="lg:hidden p-2 transition-colors text-slate-900"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X /> : <Menu />}
