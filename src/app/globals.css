@@ -1,14 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #8B5CF6;
-  --color-primary-hover: #7C3AED;
+  --color-primary: #1eb9c7;
+  --color-primary-hover: #199ea8;
   --color-secondary: #F3F4F6;
   --color-accent: #FBBF24;
-  
-  --color-brand-purple: #8B5CF6;
-  --color-brand-light: #F5F3FF;
-  --color-brand-dark: #4C1D95;
+
+  --color-brand-light: #e2f9fa;
+  --color-brand-dark: #17545b;
+
+  /* Global overwrite of purple to #1eb9c7 proportional shades */
+  --color-purple-50: #e2f9fa;
+  --color-purple-100: #bcf0f3;
+  --color-purple-200: #84e3e8;
+  --color-purple-300: #44ced6;
+  --color-purple-400: #24b8c1;
+  --color-purple-500: #1eb9c7;
+  --color-purple-600: #199ea8;
+  --color-purple-700: #178089;
+  --color-purple-800: #18666e;
+  --color-purple-900: #17545b;
+  --color-purple-950: #0a363c;
 
   --shadow-premium: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
   --shadow-premium-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -19,7 +31,7 @@
 :root {
   --background: #ffffff;
   --foreground: #0F172A;
-  --primary: #8B5CF6;
+  --primary: #1eb9c7;
   --secondary: #F8FAFC;
   --muted: #64748B;
   --border: #E2E8F0;
@@ -29,7 +41,7 @@
   :root {
     --background: #020617;
     --foreground: #F8FAFC;
-    --primary: #A78BFA;
+    --primary: #44ced6;
     --secondary: #1E293B;
     --muted: #94A3B8;
     --border: #334155;
@@ -56,13 +68,23 @@ body {
 }
 
 @keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes spin-slow-reverse {
-  from { transform: rotate(360deg); }
-  to { transform: rotate(0deg); }
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
 }
 
 .animate-spin-slow {

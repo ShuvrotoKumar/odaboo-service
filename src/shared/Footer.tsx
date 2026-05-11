@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 // ── Icons ──────────────────────────────────────────────────────────────────
@@ -67,8 +68,11 @@ const socials = [
 
 // ── Component ──────────────────────────────────────────────────────────────
 export const Footer = () => {
+  const pathname = usePathname();
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+
+  if (pathname?.startsWith("/auth")) return null;
 
   const handleSubscribe = () => {
     if (email.trim()) { setSubscribed(true); setEmail(""); }
@@ -163,11 +167,12 @@ export const Footer = () => {
                   <li key={item}>
                     <Link
                       href={
-                        item === "FAQ" ? "/faq" : 
-                        item === "About Us" ? "/about" : 
-                        item === "Terms of Service" ? "/terms" : 
-                        item === "Privacy Policy" ? "/privacy" : 
-                        "#"
+                        item === "FAQ" ? "/faq" :
+                          item === "About Us" ? "/about" :
+                            item === "Terms of Service" ? "/terms" :
+                              item === "Privacy Policy" ? "/privacy" :
+                                item === "Help Center" ? "/help" :
+                                  "#"
                       }
                       style={{
                         fontSize: "13.5px",
@@ -225,24 +230,11 @@ export const Footer = () => {
                   }}
                 />
                 <button
-                  onClick={handleSubscribe}
-                  style={{
-                    padding: "11px 22px",
-                    fontSize: "13px",
-                    fontWeight: 600,
-                    backgroundColor: "#7c5cbf",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: "0 6px 6px 0",
-                    cursor: "pointer",
-                    whiteSpace: "nowrap",
-                    transition: "background 0.2s",
-                  }}
-                  onMouseOver={e => (e.currentTarget.style.backgroundColor = "#6a4daa")}
-                  onMouseOut={e => (e.currentTarget.style.backgroundColor = "#7c5cbf")}
-                >
-                  Subscribe
-                </button>
+  onClick={handleSubscribe}
+  className="px-5 py-2.5 text-sm font-semibold bg-primary text-white border-none rounded-r-md cursor-pointer whitespace-nowrap transition-colors duration-200 hover:bg-primary/80"
+>
+  Subscribe
+</button>
               </div>
             )}
           </div>
@@ -285,10 +277,10 @@ export const Footer = () => {
           <div style={{ display: "flex", gap: "24px" }}>
             {["Privacy", "Terms", "Cookies"].map(item => (
               <Link key={item} href={
-                item === "Cookies" ? "/cookies" : 
-                item === "Terms" ? "/terms" : 
-                item === "Privacy" ? "/privacy" : 
-                "#"
+                item === "Cookies" ? "/cookies" :
+                  item === "Terms" ? "/terms" :
+                    item === "Privacy" ? "/privacy" :
+                      "#"
               } style={{
                 fontSize: "12px",
                 color: "rgba(255,255,255,0.3)",

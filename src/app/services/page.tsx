@@ -26,14 +26,14 @@ const SearchSection = ({ onSearch }: { onSearch: (term: string) => void }) => {
                             <input
                                 type="text"
                                 placeholder="Search Service"
-                                className="w-full px-6 py-4 outline-none text-slate-600 border border-slate-200 rounded-xl focus:border-purple-400 transition-colors"
+                                className="w-full px-6 py-4 outline-none text-slate-600 border border-slate-200 rounded-xl focus:border-#1eb9c7-400 transition-colors"
                                 value={term}
                                 onChange={(e) => setTerm(e.target.value)}
                             />
                         </div>
                         <button
                             onClick={() => onSearch(term)}
-                            className="bg-purple-600 hover:bg-purple-700 text-white px-10 py-4 rounded-xl font-semibold transition-all shadow-lg shadow-purple-200 flex items-center justify-center gap-2"
+                            className="bg-primary hover:bg-primary/80 text-white px-10 py-4 rounded-xl font-semibold transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2"
                         >
                             Search
                         </button>
@@ -55,13 +55,13 @@ const ServiceCard = ({ service }: { service: any }) => (
             />
         </div>
         <div className="p-6">
-            <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-purple-600 transition-colors">{service.title}</h3>
+            <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-#1eb9c7-600 transition-colors">{service.title}</h3>
             <p className="text-slate-500 text-sm mb-6 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-#1eb9c7-400"></span>
                 Anbieter insgesamt: {service.providers}
             </p>
             <div className="flex justify-end">
-                <button className="text-purple-600 border border-purple-500 px-6 py-2 rounded-lg text-sm font-semibold hover:bg-purple-50 hover:shadow-inner transition-all">
+                <button className="text-#1eb9c7-600 border border-#1eb9c7-500 px-6 py-2 rounded-lg text-sm font-semibold hover:bg-#1eb9c7-50 hover:shadow-inner transition-all">
                     Show all
                 </button>
             </div>
@@ -71,20 +71,20 @@ const ServiceCard = ({ service }: { service: any }) => (
 
 const Sidebar = ({ categories, selectedCategories, onToggleCategory, onApply }: any) => (
     <div className="w-full lg:w-72 flex-shrink-0">
-        <button className="w-full border border-purple-600 rounded-xl p-3 mb-8 flex items-center justify-center gap-2 text-purple-600 font-bold hover:bg-purple-50 transition-colors">
+        <button className="w-full border border-#1eb9c7-600 rounded-xl p-3 mb-8 flex items-center justify-center gap-2 text-#1eb9c7-600 font-bold hover:bg-#1eb9c7-50 transition-colors">
             <Filter className="w-5 h-5" />
             <span>Filter</span>
         </button>
 
         <div className="border border-slate-100 rounded-2xl p-8 bg-white shadow-sm">
-            <h4 className="text-purple-600 font-bold mb-6 text-xs uppercase tracking-widest">Filter by Services</h4>
+            <h4 className="text-#1eb9c7-600 font-bold mb-6 text-xs uppercase tracking-widest">Filter by Services</h4>
             <div className="space-y-4">
                 {categories.map((cat: string) => (
                     <label key={cat} className="flex items-center gap-4 cursor-pointer group">
                         <div className="relative flex items-center">
                             <input
                                 type="checkbox"
-                                className="peer appearance-none w-5 h-5 rounded-md border-2 border-slate-200 checked:bg-purple-600 checked:border-purple-600 transition-all cursor-pointer"
+                                className="peer appearance-none w-5 h-5 rounded-md border-2 border-slate-200 checked:bg-#1eb9c7-600 checked:border-#1eb9c7-600 transition-all cursor-pointer"
                                 checked={selectedCategories.includes(cat)}
                                 onChange={() => onToggleCategory(cat)}
                             />
@@ -98,7 +98,7 @@ const Sidebar = ({ categories, selectedCategories, onToggleCategory, onApply }: 
             </div>
             <button
                 onClick={onApply}
-                className="w-full mt-10 py-3 border-2 border-purple-600 text-purple-600 rounded-xl text-sm font-bold hover:bg-purple-600 hover:text-white transition-all shadow-sm active:scale-95"
+                className="w-full mt-10 py-3 border-2 border-#1eb9c7-600 text-#1eb9c7-600 rounded-xl text-sm font-bold hover:bg-#1eb9c7-600 hover:text-white transition-all shadow-sm active:scale-95"
             >
                 Apply filter
             </button>
@@ -108,25 +108,25 @@ const Sidebar = ({ categories, selectedCategories, onToggleCategory, onApply }: 
 
 const Pagination = () => (
     <div className="flex justify-center items-center gap-2 mt-16 mb-8">
-        <button className="flex items-center gap-1 px-4 py-2 text-slate-400 hover:text-purple-600 transition-colors font-medium">
+        <button className="flex items-center gap-1 px-4 py-2 text-slate-400 hover:text-#1eb9c7-600 transition-colors font-medium">
             <ChevronLeft className="w-4 h-4" /> Back
         </button>
         <div className="flex gap-2">
             {[1, 2, 3, 4].map(n => (
-                <button key={n} className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-600 font-semibold hover:border-purple-500 hover:text-purple-500 transition-all">
+                <button key={n} className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-600 font-semibold hover:border-#1eb9c7-500 hover:text-#1eb9c7-500 transition-all">
                     {n}
                 </button>
             ))}
-            <button className="w-10 h-10 flex items-center justify-center rounded-xl bg-purple-600 text-white font-bold shadow-lg shadow-purple-100">5</button>
+            <button className="w-10 h-10 flex items-center justify-center rounded-xl bg-#1eb9c7-600 text-white font-bold shadow-lg shadow-#1eb9c7-100">5</button>
             {[6, 7].map(n => (
-                <button key={n} className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-600 font-semibold hover:border-purple-500 hover:text-purple-500 transition-all">
+                <button key={n} className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-600 font-semibold hover:border-#1eb9c7-500 hover:text-#1eb9c7-500 transition-all">
                     {n}
                 </button>
             ))}
             <span className="flex items-end px-2 pb-2 text-slate-400 font-bold text-xl">...</span>
-            <button className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-600 font-semibold hover:border-purple-500 hover:text-purple-500 transition-all">17</button>
+            <button className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-600 font-semibold hover:border-#1eb9c7-500 hover:text-#1eb9c7-500 transition-all">17</button>
         </div>
-        <button className="flex items-center gap-1 px-6 py-2.5 bg-purple-600 text-white rounded-xl shadow-lg shadow-purple-100 hover:bg-purple-600 transition-all font-bold ml-4">
+        <button className="flex items-center gap-1 px-6 py-2.5 bg-#1eb9c7-600 text-white rounded-xl shadow-lg shadow-#1eb9c7-100 hover:bg-#1eb9c7-600 transition-all font-bold ml-4">
             Next <ChevronRight className="w-4 h-4" />
         </button>
     </div>
@@ -205,7 +205,7 @@ const ServicesPage = () => {
                                         <p className="text-slate-400 text-lg">No services found matching your criteria.</p>
                                         <button
                                             onClick={() => { setSelectedCategories([]); setAppliedFilters([]); setSearchTerm(''); }}
-                                            className="mt-4 text-purple-600 font-bold hover:underline"
+                                            className="mt-4 text-#1eb9c7-600 font-bold hover:underline"
                                         >
                                             Clear all filters
                                         </button>

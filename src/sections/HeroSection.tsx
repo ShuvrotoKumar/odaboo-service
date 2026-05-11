@@ -13,7 +13,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight"
+            className="text-4xl md:text-6xl font-bold text-[#262B2A] mb-6 tracking-tight leading-tight"
           >
             Find Expert Services <br /> For Any Need
           </motion.h1>
@@ -35,14 +35,14 @@ export const HeroSection = () => {
             className="relative max-w-4xl mx-auto mb-16"
           >
             <div className="bg-white p-3 rounded-md shadow-sm border border-slate-100 flex items-center gap-3">
-              <div className="flex-1 px-4 py-2 border border-purple-100 rounded-md">
+              <div className="flex-1 px-4 py-2 border border-#1eb9c7-100 rounded-md">
                 <input
                   type="text"
                   placeholder="Search Service"
                   className="w-full bg-transparent border-none outline-none text-slate-900 placeholder:text-slate-400 text-sm md:text-base"
                 />
               </div>
-              <PrimaryButton className="bg-[#8B7BB1] hover:bg-[#7a6a9e] rounded-md px-10 py-3 shadow-none">
+              <PrimaryButton className="bg-primary hover:bg-primary/90 rounded-md px-10 py-3 shadow-none">
                 Search
               </PrimaryButton>
             </div>

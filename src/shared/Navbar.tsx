@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -22,6 +23,8 @@ const NAV_LINKS = [
 ];
 
 export const Navbar = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -33,6 +36,8 @@ export const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (pathname?.startsWith("/auth")) return null;
 
   return (
     <nav
@@ -84,7 +89,7 @@ export const Navbar = () => {
                 placeholder="Search..."
                 className="h-9 w-48 pl-8 pr-3 rounded-full text-xs outline-none transition-all shadow-sm bg-white border border-purple-100 text-slate-900 placeholder:text-slate-400 focus:border-primary"
               />
-              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors text-[#24B8C1]" />
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 transition-colors text-purple-600" />
             </div>
 
             {isLoggedIn ? (
@@ -112,13 +117,14 @@ export const Navbar = () => {
               <div className="flex items-center gap-3">
                 <button
                   className="text-sm font-bold transition-colors text-slate-700 hover:text-primary"
-                  onClick={() => setIsLoggedIn(true)}
+                  onClick={() => router.push("/auth/login")}
                 >
                   Login
                 </button>
                 <PrimaryButton
                   size="sm"
                   className="rounded-full px-5 transition-all bg-primary hover:bg-primary-hover text-white"
+                  onClick={() => router.push("/auth/confirm_auth")}
                 >
                   Sign Up
                 </PrimaryButton>
@@ -182,8 +188,14 @@ export const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <PrimaryButton className="w-full" onClick={() => setIsLoggedIn(true)}>Login</PrimaryButton>
-                  <PrimaryButton variant="outline" className="w-full">Sign Up</PrimaryButton>
+                  <PrimaryButton className="w-full" onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    router.push("/auth/login");
+                  }}>Login</PrimaryButton>
+                  <PrimaryButton variant="outline" className="w-full" onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    router.push("/auth/confirm_auth");
+                  }}>Sign Up</PrimaryButton>
                 </>
               )}
             </div>
