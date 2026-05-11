@@ -79,11 +79,11 @@ export const Footer = () => {
     <footer style={{ backgroundColor: "#0f2020", fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
 
       {/* ── Wave transition from CTA teal → dark ── */}
-      <div style={{ lineHeight: 0, backgroundColor: "#e8f5f5" }}>
+      {/* <div style={{ lineHeight: 0, backgroundColor: "#e8f5f5" }}>
         <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style={{ display: "block", width: "100%" }}>
           <path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="#0f2020" />
         </svg>
-      </div>
+      </div> */}
 
       {/* ── Main footer body ── */}
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "56px 32px 40px" }}>

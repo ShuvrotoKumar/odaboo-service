@@ -44,7 +44,7 @@ export const ExploreServices = () => {
                 {SERVICES[0].category}
               </span>
               <h3 className="text-3xl font-bold text-white mb-2">{SERVICES[0].title}</h3>
-              <p className="text-slate-300 mb-6">{SERVICES[0].price}</p>
+              <p className="text-slate-300 mb-6">{SERVICES[0].providers}+ Active Providers</p>
               <PrimaryButton size="sm">Book Now</PrimaryButton>
             </div>
           </motion.div>
@@ -66,7 +66,7 @@ export const ExploreServices = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 p-6">
               <h3 className="text-xl font-bold text-white mb-1">{SERVICES[1].title}</h3>
-              <p className="text-slate-300 text-sm">{SERVICES[1].price}</p>
+              <p className="text-slate-300 text-sm">{SERVICES[1].providers} Active Providers</p>
             </div>
           </motion.div>
 
@@ -87,7 +87,7 @@ export const ExploreServices = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 p-6">
               <h3 className="text-lg font-bold text-white mb-1">{SERVICES[2].title}</h3>
-              <p className="text-slate-300 text-xs">{SERVICES[2].price}</p>
+              <p className="text-slate-300 text-xs">{SERVICES[2].providers} Active Providers</p>
             </div>
           </motion.div>
 
@@ -108,7 +108,7 @@ export const ExploreServices = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 p-6">
               <h3 className="text-lg font-bold text-white mb-1">{SERVICES[3].title}</h3>
-              <p className="text-slate-300 text-xs">{SERVICES[3].price}</p>
+              <p className="text-slate-300 text-xs">{SERVICES[3].providers} Active Providers</p>
             </div>
           </motion.div>
         </div>
