@@ -1,11 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { Container } from "@/components/Container";
 import { PrimaryButton } from "@/components/PrimaryButton";
 import { Search } from "lucide-react";
 
 export const HeroSection = () => {
+  const router = useRouter();
   return (
     <section className="relative pt-32 pb-20 lg:pt-44 lg:pb-32 overflow-hidden bg-white">
       {/* Cinematic Background Blobs */}
@@ -66,7 +68,10 @@ export const HeroSection = () => {
                   className="w-full bg-transparent border-none outline-none text-slate-900 placeholder:text-slate-400 text-base font-medium"
                 />
               </div>
-              <PrimaryButton className="w-full md:w-auto bg-primary hover:bg-primary/90 text-white rounded-[2rem] px-12 py-4 h-auto text-lg font-bold shadow-lg shadow-primary/20 transform hover:scale-[1.02] active:scale-[0.98] transition-all">
+              <PrimaryButton 
+                onClick={() => router.push("/services")}
+                className="w-full md:w-auto bg-primary hover:bg-primary/90 text-white rounded-[2rem] px-12 py-4 h-auto text-lg font-bold shadow-lg shadow-primary/20 transform hover:scale-[1.02] active:scale-[0.98] transition-all"
+              >
                 Search
               </PrimaryButton>
             </div>

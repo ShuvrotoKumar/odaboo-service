@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import { Container } from "@/components/Container";
 import { Search, Calendar, CheckCircle, CreditCard, ArrowRight } from "lucide-react";
 
@@ -40,7 +41,7 @@ export const HowItWorks = () => {
   const [activeId, setActiveId] = useState(1);
 
   return (
-    <section className="py-32 bg-slate-50 overflow-hidden">
+    <section id="how-it-works" className="py-32 bg-slate-50 overflow-hidden">
       <Container>
         <div className="text-center mb-24">
           <motion.span
@@ -113,14 +114,16 @@ export const HowItWorks = () => {
                         {step.description}
                       </p>
                       
-                      <motion.div
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.3 }}
-                        className="inline-flex items-center gap-2 text-primary font-bold text-sm group"
-                      >
-                        Learn more <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </motion.div>
+                      <Link href="/about">
+                        <motion.div
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.3 }}
+                          className="inline-flex items-center gap-2 text-primary font-bold text-sm group"
+                        >
+                          Learn more <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </motion.div>
+                      </Link>
                     </motion.div>
                   )}
                 </AnimatePresence>

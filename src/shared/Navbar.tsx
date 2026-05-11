@@ -87,6 +87,9 @@ export const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search..."
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") router.push("/services");
+                }}
                 className="h-11 w-56 pl-10 pr-4 rounded-full text-sm outline-none transition-all shadow-sm bg-slate-50 border border-slate-100 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:bg-white"
               />
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors text-slate-400 group-focus-within:text-primary" />
@@ -94,19 +97,19 @@ export const Navbar = () => {
 
             {isLoggedIn ? (
               <div className="flex items-center gap-4">
-                <div
-                  className="w-10 h-10 rounded-full border-2 p-0.5 cursor-pointer overflow-hidden transition-colors border-primary"
-                  onClick={() => setIsLoggedIn(false)}
-                >
-                  <Image
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop"
-                    alt="Profile"
-                    width={40}
-                    height={40}
-                    className="w-full h-full object-cover rounded-full"
-                  />
-                </div>
+                <Link href="/profile">
+                  <div className="w-10 h-10 rounded-full border-2 p-0.5 cursor-pointer overflow-hidden transition-colors border-primary">
+                    <Image
+                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop"
+                      alt="Profile"
+                      width={40}
+                      height={40}
+                      className="w-full h-full object-cover rounded-full"
+                    />
+                  </div>
+                </Link>
                 <PrimaryButton
+                  onClick={() => router.push("/services")}
                   className="rounded-xl px-6 py-2.5 text-sm font-bold transition-all bg-primary hover:bg-primary-hover text-white shadow-lg shadow-primary/20"
                 >
                   Post Your Need

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Container } from "@/components/Container";
 import { PrimaryButton } from "@/components/PrimaryButton";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
@@ -43,13 +44,17 @@ export const CTASection = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
-                <PrimaryButton className="px-10 py-4 h-auto text-lg rounded-2xl group">
-                  Get Started Now
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </PrimaryButton>
-                <button className="px-8 py-4 text-white font-bold hover:text-primary transition-colors flex items-center gap-2">
-                  Learn how it works
-                </button>
+                <Link href="/auth/confirm_auth">
+                  <PrimaryButton className="px-10 py-4 h-auto text-lg rounded-2xl group">
+                    Get Started Now
+                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </PrimaryButton>
+                </Link>
+                <Link href="#how-it-works">
+                  <button className="px-8 py-4 text-white font-bold hover:text-primary transition-colors flex items-center gap-2">
+                    Learn how it works
+                  </button>
+                </Link>
               </div>
 
               <div className="grid grid-cols-2 sm:flex items-center gap-6">

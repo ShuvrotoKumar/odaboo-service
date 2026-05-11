@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, X, HelpCircle, Zap, Shield, Star, ChevronDown } from "lucide-react";
+import Link from "next/link";
 import { Container } from "@/components/Container";
 import { CTASection } from "@/sections/CTASection";
 import { cn } from "@/lib/utils";
@@ -157,7 +158,7 @@ export default function SubscriptionPage() {
                             >
                                 {plan.isPopular && (
                                     <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                        <span className="bg-gradient-to-r from-purple-600 to-cyan-500 text-white text-xs font-bold uppercase tracking-widest py-1.5 px-4 rounded-full shadow-lg">
+                                        <span className="bg-gradient-to-r from-primary to-purple-600 text-white text-xs font-bold uppercase tracking-widest py-1.5 px-4 rounded-full shadow-lg">
                                             Most Popular
                                         </span>
                                     </div>
@@ -165,7 +166,7 @@ export default function SubscriptionPage() {
 
                                 <div className="flex items-center justify-between mb-4">
                                     <h3 className="text-2xl font-bold text-slate-900">{plan.name}</h3>
-                                    <plan.icon className={cn("w-6 h-6", plan.isPopular ? "text-purple-600" : "text-slate-400")} />
+                                    <plan.icon className={cn("w-6 h-6", plan.isPopular ? "text-primary" : "text-slate-400")} />
                                 </div>
 
                                 <p className="text-slate-500 text-sm mb-6 h-10">{plan.description}</p>
@@ -184,16 +185,18 @@ export default function SubscriptionPage() {
                                     )}
                                 </div>
 
-                                <button
-                                    className={cn(
-                                        "w-full py-3.5 rounded-xl font-bold text-sm transition-all shadow-sm active:scale-95 mb-8",
-                                        plan.isPopular
-                                            ? "bg-purple-600 hover:bg-purple-700 text-white shadow-purple-600/25"
-                                            : "bg-slate-50 hover:bg-slate-100 text-slate-900 border border-slate-200"
-                                    )}
-                                >
-                                    {plan.buttonText}
-                                </button>
+                                <Link href="/auth/confirm_auth">
+                                    <button
+                                        className={cn(
+                                            "w-full py-3.5 rounded-xl font-bold text-sm transition-all shadow-sm active:scale-95 mb-8",
+                                            plan.isPopular
+                                                ? "bg-primary hover:bg-primary-hover text-white shadow-primary/25"
+                                                : "bg-slate-50 hover:bg-slate-100 text-slate-900 border border-slate-200"
+                                        )}
+                                    >
+                                        {plan.buttonText}
+                                    </button>
+                                </Link>
 
                                 <div className="space-y-4">
                                     <p className="text-sm font-bold text-slate-900">What's included:</p>
