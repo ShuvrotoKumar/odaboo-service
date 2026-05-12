@@ -8,6 +8,15 @@ import {
   Search,
   Menu,
   X,
+  User,
+  MessageSquare,
+  FileSearch,
+  Settings,
+  LogOut,
+  ChevronDown,
+  CalendarRange,
+  ClipboardList,
+  Wallet,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/Container";
@@ -22,17 +31,37 @@ const NAV_LINKS = [
   { name: "Feed", href: "/feed" },
 ];
 
+const CUSTOMER_MENU = [
+  { name: "My Profile", icon: User, href: "/profile" },
+  { name: "Messages", icon: MessageSquare, href: "/messages" },
+  { name: "My Bookings", icon: FileSearch, href: "/bookings" },
+  { name: "Settings", icon: Settings, href: "/settings", hasChevron: true },
+];
+
+const PROVIDER_MENU = [
+  { name: "My Profile", icon: User, href: "/profile" },
+  { name: "Messages", icon: MessageSquare, href: "/messages" },
+  { name: "Booking Requests", icon: CalendarRange, href: "/booking-requests" },
+  { name: "Manage Services", icon: ClipboardList, href: "/manage-services" },
+  { name: "Earnings", icon: Wallet, href: "/earnings" },
+  { name: "Settings", icon: Settings, href: "/settings", hasChevron: true },
+];
+
 export const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [userRole, setUserRole] = useState<"customer" | "provider">("customer");
 
   useEffect(() => {
     // Check initial login state
     const token = localStorage.getItem("auth_token");
+    const role = localStorage.getItem("user_role") as "customer" | "provider";
     if (token) setIsLoggedIn(true);
+    if (role) setUserRole(role);
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -41,7 +70,9 @@ export const Navbar = () => {
     // Listen for storage changes (for login/logout sync)
     const handleStorageChange = () => {
       const token = localStorage.getItem("auth_token");
+      const role = localStorage.getItem("user_role") as "customer" | "provider";
       setIsLoggedIn(!!token);
+      if (role) setUserRole(role);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -52,6 +83,30 @@ export const Navbar = () => {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
+
+    const handleLogout = () => {
+      localStorage.removeItem("auth_token");
+      localStorage.removeItem("user_role");
+      setIsLoggedIn(false);
+      setIsProfileOpen(false);
+      // Dispatch storage event manually for sync
+      window.dispatchEvent(new Event("storage"));
+      router.push("/auth/login");
+    };
+
+    // Close dropdown on outside click
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (isProfileOpen) {
+          const target = event.target as HTMLElement;
+          if (!target.closest(".profile-dropdown-container")) {
+            setIsProfileOpen(false);
+          }
+        }
+      };
+      document.addEventListener("click", handleClickOutside);
+      return () => document.removeEventListener("click", handleClickOutside);
+    }, [isProfileOpen]);
 
   if (pathname?.startsWith("/auth")) return null;
 
@@ -113,8 +168,11 @@ export const Navbar = () => {
 
             {isLoggedIn ? (
               <div className="flex items-center gap-4">
-                <Link href="/profile">
-                  <div className="w-11 h-11 rounded-full border-[1.5px] p-0.5 cursor-pointer overflow-hidden transition-all border-[#17b9c1] hover:scale-105 active:scale-95">
+                <div className="relative profile-dropdown-container">
+                  <div 
+                    onClick={() => setIsProfileOpen(!isProfileOpen)}
+                    className="w-11 h-11 rounded-full border-[1.5px] p-0.5 cursor-pointer overflow-hidden transition-all border-[#17b9c1] hover:scale-105 active:scale-95"
+                  >
                     <Image
                       src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop"
                       alt="Profile"
@@ -123,7 +181,54 @@ export const Navbar = () => {
                       className="w-full h-full object-cover rounded-full"
                     />
                   </div>
-                </Link>
+
+                  {/* Dropdown Menu */}
+                  <AnimatePresence>
+                    {isProfileOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute right-0 mt-4 w-60 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] border border-slate-100 py-3 z-50 overflow-hidden"
+                      >
+                        <div className="space-y-1 px-2">
+                          {(userRole === "provider" ? PROVIDER_MENU : CUSTOMER_MENU).map((item) => (
+                            <Link
+                              key={item.name}
+                              href={item.href}
+                              onClick={() => setIsProfileOpen(false)}
+                              className="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
+                            >
+                              <div className="flex items-center gap-3">
+                                <item.icon className="w-[18px] h-[18px] text-slate-600 group-hover:text-primary transition-colors" />
+                                <span className="text-[15px] font-medium text-slate-700 group-hover:text-slate-900 transition-colors">
+                                  {item.name}
+                                </span>
+                              </div>
+                              {item.hasChevron && (
+                                <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-slate-600 transition-colors" />
+                              )}
+                            </Link>
+                          ))}
+                        </div>
+                        
+                        <div className="mt-2 pt-2 border-t border-slate-50 px-2">
+                          <button
+                            onClick={handleLogout}
+                            className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl hover:bg-red-50 transition-colors group"
+                          >
+                            <LogOut className="w-[18px] h-[18px] text-red-500 transition-colors" />
+                            <span className="text-[15px] font-medium text-red-500 transition-colors">
+                              Logout
+                            </span>
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
                 <PrimaryButton
                   onClick={() => router.push("/services")}
                   className="rounded-[10px] px-6 h-11 text-[15px] font-semibold transition-all bg-[#17b9c1] hover:bg-[#15a7ad] text-white shadow-none border-none flex items-center justify-center whitespace-nowrap"
@@ -206,7 +311,7 @@ export const Navbar = () => {
                   >
                     Post your requirements
                   </PrimaryButton>
-                  <button className="text-slate-600 font-medium py-2 hover:text-primary transition-colors" onClick={() => setIsLoggedIn(false)}>Logout</button>
+                  <button className="text-slate-600 font-medium py-2 hover:text-primary transition-colors text-left" onClick={handleLogout}>Logout</button>
                 </>
               ) : (
                 <>

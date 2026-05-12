@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,6 +8,7 @@ import { Mail, Lock, User, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function SignUpPage() {
+    const router = useRouter();
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -15,6 +17,12 @@ export default function SignUpPage() {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        // Logic for registration would go here
+        router.push("/auth/login");
     };
 
     return (
@@ -49,64 +57,65 @@ export default function SignUpPage() {
                 </div>
 
                 {/* Form Fields */}
-                <div className="space-y-4 mb-8">
-
-                    <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <User className="h-5 w-5 text-slate-400" />
+                <form onSubmit={handleSubmit}>
+                    <div className="space-y-4 mb-8">
+                        <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <User className="h-5 w-5 text-slate-400" />
+                            </div>
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Full Name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                className="w-full pl-10 pr-4 py-3 rounded-md border border-primary/20 text-slate-900 bg-transparent placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+                                required
+                            />
                         </div>
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder="Full Name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            className="w-full pl-10 pr-4 py-3 rounded-md border border-primary/20 text-slate-900 bg-transparent placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
-                            required
-                        />
+
+                        <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <Mail className="h-5 w-5 text-slate-400" />
+                            </div>
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Email Address"
+                                value={formData.email}
+                                onChange={handleChange}
+                                className="w-full pl-10 pr-4 py-3 rounded-md border border-primary/20 text-slate-900 bg-transparent placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+                                required
+                            />
+                        </div>
+
+                        <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <Lock className="h-5 w-5 text-slate-400" />
+                            </div>
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                className="w-full pl-10 pr-4 py-3 rounded-md border border-primary/20 text-slate-900 bg-transparent placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+                                required
+                            />
+                        </div>
                     </div>
 
-                    <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <Mail className="h-5 w-5 text-slate-400" />
-                        </div>
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Email Address"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="w-full pl-10 pr-4 py-3 rounded-md border border-primary/20 text-slate-900 bg-transparent placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
-                            required
-                        />
-                    </div>
-
-                    <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <Lock className="h-5 w-5 text-slate-400" />
-                        </div>
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            className="w-full pl-10 pr-4 py-3 rounded-md border border-primary/20 text-slate-900 bg-transparent placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
-                            required
-                        />
-                    </div>
-
-                </div>
-
-                {/* Submit Button */}
-                <button
-                    className={cn(
-                        "w-full flex items-center justify-center gap-2 py-3.5 rounded-md text-sm font-bold text-white transition-all duration-200 shadow-md bg-primary/60 hover:bg-primary/70 shadow-primary/20"
-                    )}
-                >
-                    <span>Create Account</span>
-                    <ArrowRight className="w-4 h-4" />
-                </button>
+                    {/* Submit Button */}
+                    <button
+                        type="submit"
+                        className={cn(
+                            "w-full flex items-center justify-center gap-2 py-3.5 rounded-md text-sm font-bold text-white transition-all duration-200 shadow-md bg-primary/60 hover:bg-primary/70 shadow-primary/20"
+                        )}
+                    >
+                        <span>Create Account</span>
+                        <ArrowRight className="w-4 h-4" />
+                    </button>
+                </form>
 
                 {/* Terms text */}
                 <p className="text-xs text-slate-500 text-center mt-4">

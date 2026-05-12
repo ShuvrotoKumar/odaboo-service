@@ -73,7 +73,12 @@ export default function ConfirmAuthPage() {
 
                 {/* Signup Action */}
                 <button
-                    onClick={() => router.push("/auth/sign_up")}
+                    onClick={() => {
+                        if (selectedRole) {
+                            localStorage.setItem("user_role", selectedRole);
+                            router.push("/auth/sign_up");
+                        }
+                    }}
                     className={cn(
                         "w-full py-3.5 rounded-md text-sm font-bold text-white transition-colors duration-200 shadow-md",
                         selectedRole
