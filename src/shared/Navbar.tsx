@@ -30,11 +30,27 @@ export const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    // Check initial login state
+    const token = localStorage.getItem("auth_token");
+    if (token) setIsLoggedIn(true);
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
+    
+    // Listen for storage changes (for login/logout sync)
+    const handleStorageChange = () => {
+      const token = localStorage.getItem("auth_token");
+      setIsLoggedIn(!!token);
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("storage", handleStorageChange);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
   if (pathname?.startsWith("/auth")) return null;
@@ -98,21 +114,21 @@ export const Navbar = () => {
             {isLoggedIn ? (
               <div className="flex items-center gap-4">
                 <Link href="/profile">
-                  <div className="w-10 h-10 rounded-full border-2 p-0.5 cursor-pointer overflow-hidden transition-colors border-primary">
+                  <div className="w-11 h-11 rounded-full border-[1.5px] p-0.5 cursor-pointer overflow-hidden transition-all border-[#17b9c1] hover:scale-105 active:scale-95">
                     <Image
                       src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop"
                       alt="Profile"
-                      width={40}
-                      height={40}
+                      width={44}
+                      height={44}
                       className="w-full h-full object-cover rounded-full"
                     />
                   </div>
                 </Link>
                 <PrimaryButton
                   onClick={() => router.push("/services")}
-                  className="rounded-xl px-6 py-2.5 text-sm font-bold transition-all bg-primary hover:bg-primary-hover text-white shadow-lg shadow-primary/20"
+                  className="rounded-[10px] px-6 h-11 text-[15px] font-semibold transition-all bg-[#17b9c1] hover:bg-[#15a7ad] text-white shadow-none border-none flex items-center justify-center whitespace-nowrap"
                 >
-                  Post Your Need
+                  Post your requirements
                 </PrimaryButton>
               </div>
             ) : (
@@ -184,8 +200,13 @@ export const Navbar = () => {
             <div className="mt-auto flex flex-col gap-4">
               {isLoggedIn ? (
                 <>
-                  <PrimaryButton className="w-full bg-primary">Post Your Need</PrimaryButton>
-                  <button className="text-slate-600 font-medium" onClick={() => setIsLoggedIn(false)}>Logout</button>
+                  <PrimaryButton 
+                    className="w-full bg-[#17b9c1] hover:bg-[#15a7ad] text-white rounded-[10px] h-12 font-semibold"
+                    onClick={() => router.push("/services")}
+                  >
+                    Post your requirements
+                  </PrimaryButton>
+                  <button className="text-slate-600 font-medium py-2 hover:text-primary transition-colors" onClick={() => setIsLoggedIn(false)}>Logout</button>
                 </>
               ) : (
                 <>
