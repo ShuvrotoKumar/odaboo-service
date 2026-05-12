@@ -228,7 +228,13 @@ export default function PostRequirementPage() {
     );
 }
 
-const TrustItem = ({ icon: Icon, title, desc }: any) => (
+interface TrustItemProps {
+    icon: React.ElementType;
+    title: string;
+    desc: string;
+}
+
+const TrustItem = ({ icon: Icon, title, desc }: TrustItemProps) => (
     <div className="flex items-start gap-5 group">
         <div className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center shrink-0 group-hover:border-[#17b9c1]/20 group-hover:bg-[#17b9c1]/5 transition-all">
             <Icon className="w-5 h-5 text-slate-400 group-hover:text-[#17b9c1] transition-colors" />
@@ -240,7 +246,17 @@ const TrustItem = ({ icon: Icon, title, desc }: any) => (
     </div>
 );
 
-const ModernInput = ({ label, icon: Icon, placeholder, value, onChange, type = "text", options = [] }: any) => (
+interface ModernInputProps {
+    label: string;
+    icon: React.ElementType;
+    placeholder?: string;
+    value: string;
+    onChange: (value: string) => void;
+    type?: "text" | "select";
+    options?: { value: string; label: string }[];
+}
+
+const ModernInput = ({ label, icon: Icon, placeholder, value, onChange, type = "text", options = [] }: ModernInputProps) => (
     <div className="space-y-3">
         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">{label}</label>
         <div className="relative group">
@@ -254,7 +270,7 @@ const ModernInput = ({ label, icon: Icon, placeholder, value, onChange, type = "
                         onChange={(e) => onChange(e.target.value)}
                     >
                         <option value="" disabled>{placeholder || "Select"}</option>
-                        {options.map((opt: any) => (
+                        {options.map((opt) => (
                             <option key={opt.value} value={opt.value}>{opt.label}</option>
                         ))}
                     </select>
