@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/Container";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   Phone, 
   Mail, 
@@ -133,44 +133,85 @@ export const Footer = () => {
         </div>
 
         {/* Newsletter & Contact Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 py-12 border-y border-white/5 mb-12">
-          <div className="lg:col-span-2 flex flex-col md:flex-row items-center gap-8">
-            <div className="flex-shrink-0 text-center md:text-left">
-              <h4 className="text-xl font-bold text-white mb-2">Subscribe to our newsletter</h4>
-              <p className="text-slate-500">Get the latest updates and exclusive offers.</p>
-            </div>
-            <div className="flex-grow w-full max-w-md relative group">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all text-white placeholder:text-slate-600"
-              />
-              <button
-                onClick={handleSubscribe}
-                className="absolute right-2 top-2 bottom-2 bg-primary hover:bg-primary/90 text-white rounded-xl px-6 flex items-center gap-2 font-bold transition-all active:scale-95"
-              >
-                {subscribed ? "Subscribed!" : <><span className="hidden sm:inline">Join</span> <Send className="w-4 h-4" /></>}
-              </button>
-            </div>
-          </div>
+        <div className="relative group/newsletter p-8 md:p-12 bg-white/[0.02] border border-white/5 rounded-[3rem] backdrop-blur-sm mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+            <div className="lg:col-span-2 flex flex-col xl:flex-row items-center gap-10">
+              <div className="flex-shrink-0 text-center xl:text-left">
+                <div className="flex items-center justify-center xl:justify-start gap-2 mb-3">
+                  <div className="w-8 h-px bg-primary/50" />
+                  <span className="text-primary text-xs font-bold uppercase tracking-[0.2em]">Newsletter</span>
+                </div>
+                <h4 className="text-3xl font-bold text-white mb-2 tracking-tight">Stay in the loop</h4>
+                <p className="text-slate-500 max-w-sm">Get expert tips and exclusive service offers delivered to your inbox.</p>
+              </div>
 
-          <div className="flex flex-col sm:flex-row lg:flex-col gap-6 justify-center lg:justify-start">
-            <a href="tel:+1234567890" className="flex items-center gap-4 text-slate-300 hover:text-primary transition-colors group">
-              <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-all">
-                <Phone className="w-5 h-5" />
+              <div className="flex-grow w-full max-w-xl relative">
+                <div className="relative group">
+                  <input
+                    type="email"
+                    placeholder="Enter your work email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full bg-slate-900/50 border border-white/10 rounded-2xl px-7 py-5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-white placeholder:text-slate-600 text-lg shadow-inner"
+                  />
+                  <div className="absolute right-2 top-2 bottom-2">
+                    <button
+                      onClick={handleSubscribe}
+                      className="h-full bg-primary hover:bg-primary/90 text-white rounded-xl px-8 flex items-center gap-3 font-bold transition-all active:scale-95 shadow-lg shadow-primary/20 group/btn overflow-hidden relative"
+                    >
+                      <AnimatePresence mode="wait">
+                        {subscribed ? (
+                          <motion.div
+                            key="success"
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: -20, opacity: 0 }}
+                            className="flex items-center gap-2"
+                          >
+                            <span>Success!</span>
+                          </motion.div>
+                        ) : (
+                          <motion.div
+                            key="idle"
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: -20, opacity: 0 }}
+                            className="flex items-center gap-2"
+                          >
+                            <span>Subscribe</span>
+                            <Send className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <span className="font-semibold text-slate-300 group-hover:text-primary transition-colors">+1 (234) 567-890</span>
-            </a>
-            <a href="mailto:hello@odaboo.com" className="flex items-center gap-4 text-slate-300 hover:text-primary transition-colors group">
-              <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-all">
-                <Mail className="w-5 h-5" />
-              </div>
-              <span className="font-semibold text-slate-300 group-hover:text-primary transition-colors">hello@odaboo.com</span>
-            </a>
+            </div>
+
+            <div className="flex flex-col sm:flex-row lg:flex-col gap-8 justify-center lg:justify-end lg:pl-12 lg:border-l border-white/5">
+              <a href="tel:+1234567890" className="flex items-center gap-5 group/item">
+                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-white transition-all duration-500 shadow-sm group-hover/item:shadow-primary/20 group-hover/item:scale-110">
+                  <Phone className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Call Us</p>
+                  <span className="text-lg font-bold text-slate-200 group-hover/item:text-white transition-colors">+1 (234) 567-890</span>
+                </div>
+              </a>
+              <a href="mailto:hello@odaboo.com" className="flex items-center gap-5 group/item">
+                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-white transition-all duration-500 shadow-sm group-hover/item:shadow-primary/20 group-hover/item:scale-110">
+                  <Mail className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Email Us</p>
+                  <span className="text-lg font-bold text-slate-200 group-hover/item:text-white transition-colors">hello@odaboo.com</span>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
+
 
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm">
