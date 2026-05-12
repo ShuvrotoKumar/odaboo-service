@@ -129,7 +129,7 @@ export default function FeedPage() {
                                                 <ImageIcon className="w-5 h-5" />
                                                 <span className="text-sm font-medium">Photo</span>
                                             </label>
-                                        </div>>
+                                        </div>
                                         <button
                                             className={cn(
                                                 "flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm transition-all",

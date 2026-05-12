@@ -63,6 +63,25 @@ export default function MyBookingsCustomerPage() {
     const [activeTab, setActiveTab] = useState("All Bookings");
     const [searchQuery, setSearchQuery] = useState("");
 
+    const filteredBookings = BOOKINGS.filter((booking) => {
+        // Tab filtering
+        const matchesTab = (() => {
+            if (activeTab === "All Bookings") return true;
+            if (activeTab === "Upcoming") return booking.status === "Confirmed" || booking.status === "Pending";
+            if (activeTab === "Completed") return booking.status === "Completed";
+            if (activeTab === "Cancelled") return booking.status === "Cancelled";
+            return true;
+        })();
+
+        // Search filtering
+        const q = searchQuery.toLowerCase();
+        const matchesSearch = booking.id.toLowerCase().includes(q) || 
+                              booking.providerName.toLowerCase().includes(q) ||
+                              booking.serviceName.toLowerCase().includes(q);
+
+        return matchesTab && matchesSearch;
+    });
+
     return (
         <div className="min-h-screen bg-white pt-32 pb-20">
             <Container>
@@ -111,7 +130,7 @@ export default function MyBookingsCustomerPage() {
                 {/* Bookings List */}
                 <div className="space-y-6">
                     <AnimatePresence mode="popLayout">
-                        {BOOKINGS.map((booking, index) => (
+                        {filteredBookings.length > 0 ? filteredBookings.map((booking, index) => (
                             <motion.div
                                 key={booking.id}
                                 initial={{ opacity: 0, y: 20 }}
@@ -197,7 +216,20 @@ export default function MyBookingsCustomerPage() {
 
                                 </div>
                             </motion.div>
-                        ))}
+                        )) : (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="py-20 text-center"
+                            >
+                                <div className="w-24 h-24 mx-auto bg-slate-50 rounded-[2rem] flex items-center justify-center mb-6">
+                                    <Search className="w-8 h-8 text-slate-300" />
+                                </div>
+                                <h3 className="text-xl font-black text-slate-800 mb-2">No Bookings Found</h3>
+                                <p className="text-slate-400 font-bold max-w-sm mx-auto">We couldn't find any bookings matching your current filter criteria.</p>
+                            </motion.div>
+                        )}
                     </AnimatePresence>
                 </div>
 
