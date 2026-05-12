@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/shared/Navbar";
-import { Footer } from "@/shared/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,6 +18,8 @@ export const metadata: Metadata = {
   description: "Connect with trusted professionals for your home, business, and personal needs. Book appointments, manage payments, and get things done.",
 };
 
+import { ConditionalFooter } from "@/shared/ConditionalFooter";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,7 +32,7 @@ export default function RootLayout({
         <main className="flex-grow">
           {children}
         </main>
-        <Footer />
+        <ConditionalFooter />
       </body>
     </html>
   );

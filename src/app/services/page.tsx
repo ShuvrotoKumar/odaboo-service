@@ -34,9 +34,9 @@ const SearchSection = ({ onSearch }: { onSearch: (term: string) => void }) => {
             {/* Background Decorations */}
             <div className="absolute top-0 left-0 w-full h-full -z-10 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-from)_0%,_transparent_40%)] from-purple-50/50" />
             <div className="absolute bottom-0 right-0 w-full h-full -z-10 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-from)_0%,_transparent_40%)] from-blue-50/50" />
-            
+
             <Container>
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
@@ -54,7 +54,7 @@ const SearchSection = ({ onSearch }: { onSearch: (term: string) => void }) => {
                     </p>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
@@ -77,7 +77,7 @@ const SearchSection = ({ onSearch }: { onSearch: (term: string) => void }) => {
                             </div>
                             <button
                                 onClick={() => onSearch(term)}
-                                className="bg-slate-900 hover:bg-slate-800 text-white px-12 py-5 rounded-xl font-bold transition-all shadow-xl hover:shadow-slate-200 active:scale-[0.98] flex items-center justify-center gap-2"
+                                className="bg-primary hover:bg-primary/80 text-white px-12 py-5 rounded-xl font-bold transition-all shadow-xl hover:shadow-slate-200 active:scale-[0.98] flex items-center justify-center gap-2"
                             >
                                 Find Service
                             </button>
@@ -90,7 +90,7 @@ const SearchSection = ({ onSearch }: { onSearch: (term: string) => void }) => {
 };
 
 const ServiceCard = ({ service }: { service: any }) => (
-    <motion.div 
+    <motion.div
         variants={fadeInUp}
         whileHover={{ y: -8 }}
         className="bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all duration-500 group"
@@ -137,7 +137,7 @@ const Sidebar = ({ categories, selectedCategories, onToggleCategory, onClear }: 
                     <span>Filters</span>
                 </div>
                 {selectedCategories.length > 0 && (
-                    <button 
+                    <button
                         onClick={onClear}
                         className="text-sm font-semibold text-purple-600 hover:text-purple-700 underline underline-offset-4"
                     >
@@ -161,7 +161,7 @@ const Sidebar = ({ categories, selectedCategories, onToggleCategory, onClear }: 
                                     checked={selectedCategories.includes(cat)}
                                     onChange={() => onToggleCategory(cat)}
                                 />
-                                <motion.div 
+                                <motion.div
                                     initial={false}
                                     animate={selectedCategories.includes(cat) ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
                                     className="absolute inset-0 flex items-center justify-center pointer-events-none"
@@ -209,8 +209,8 @@ const Pagination = () => (
                 {[1, 2, 3].map(n => (
                     <button key={n} className={cn(
                         "w-11 h-11 flex items-center justify-center rounded-xl font-bold transition-all",
-                        n === 1 
-                            ? "bg-purple-600 text-white shadow-lg shadow-purple-200" 
+                        n === 1
+                            ? "bg-purple-600 text-white shadow-lg shadow-purple-200"
                             : "border border-slate-100 text-slate-600 hover:border-purple-200 hover:text-purple-600 bg-white"
                     )}>
                         {n}
@@ -288,7 +288,7 @@ const ServicesPage = () => {
                             <div className="flex-grow">
                                 <AnimatePresence mode="wait">
                                     {filteredServices.length > 0 ? (
-                                        <motion.div 
+                                        <motion.div
                                             key="results"
                                             variants={staggerContainer}
                                             initial="initial"
@@ -301,7 +301,7 @@ const ServicesPage = () => {
                                             ))}
                                         </motion.div>
                                     ) : (
-                                        <motion.div 
+                                        <motion.div
                                             key="no-results"
                                             initial={{ opacity: 0, scale: 0.95 }}
                                             animate={{ opacity: 1, scale: 1 }}
@@ -323,7 +323,7 @@ const ServicesPage = () => {
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
-                                
+
                                 {filteredServices.length > 0 && <Pagination />}
                             </div>
                         </div>

@@ -22,10 +22,10 @@ export default function LoginPage() {
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=2000&auto=format&fit=crop"
+                    src="/bg.jpg"
                     alt="Professionals"
                     fill
-                    className="object-cover"
+                    className="object-cover blur-xs"
                     priority
                 />
                 {/* Dark overlay to make the card pop */}
@@ -81,7 +81,7 @@ export default function LoginPage() {
                     </div>
 
                     <div className="flex justify-end">
-                        <Link href="#" className="text-xs font-semibold text-purple-600 hover:underline">
+                        <Link href="/auth/forgot_password" className="text-xs font-semibold text-purple-600 hover:underline">
                             Forgot password?
                         </Link>
                     </div>
