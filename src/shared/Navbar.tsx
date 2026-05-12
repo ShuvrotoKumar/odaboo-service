@@ -32,19 +32,19 @@ const NAV_LINKS = [
 ];
 
 const CUSTOMER_MENU = [
-  { name: "My Profile", icon: User, href: "/profile" },
+  { name: "My Profile", icon: User, href: "/myprofile_customer" },
   { name: "Messages", icon: MessageSquare, href: "/messages" },
-  { name: "My Bookings", icon: FileSearch, href: "/bookings" },
-  { name: "Settings", icon: Settings, href: "/settings", hasChevron: true },
+  { name: "My Bookings", icon: FileSearch, href: "/my_bookings_customer" },
+  { name: "Settings", icon: Settings, href: "/settings_customer", hasChevron: true },
 ];
 
 const PROVIDER_MENU = [
-  { name: "My Profile", icon: User, href: "/profile" },
+  { name: "My Profile", icon: User, href: "/myprofile_provider" },
   { name: "Messages", icon: MessageSquare, href: "/messages" },
   { name: "Booking Requests", icon: CalendarRange, href: "/booking-requests" },
-  { name: "Manage Services", icon: ClipboardList, href: "/manage-services" },
-  { name: "Earnings", icon: Wallet, href: "/earnings" },
-  { name: "Settings", icon: Settings, href: "/settings", hasChevron: true },
+  { name: "Manage Services", icon: ClipboardList, href: "/manage_services" },
+  // { name: "Earnings", icon: Wallet, href: "/earnings" },
+  { name: "Settings", icon: Settings, href: "/settings_provider", hasChevron: true },
 ];
 
 export const Navbar = () => {
@@ -66,7 +66,7 @@ export const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-    
+
     // Listen for storage changes (for login/logout sync)
     const handleStorageChange = () => {
       const token = localStorage.getItem("auth_token");
@@ -77,36 +77,36 @@ export const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("storage", handleStorageChange);
-    
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
 
-    const handleLogout = () => {
-      localStorage.removeItem("auth_token");
-      localStorage.removeItem("user_role");
-      setIsLoggedIn(false);
-      setIsProfileOpen(false);
-      // Dispatch storage event manually for sync
-      window.dispatchEvent(new Event("storage"));
-      router.push("/auth/login");
-    };
+  const handleLogout = () => {
+    localStorage.removeItem("auth_token");
+    localStorage.removeItem("user_role");
+    setIsLoggedIn(false);
+    setIsProfileOpen(false);
+    // Dispatch storage event manually for sync
+    window.dispatchEvent(new Event("storage"));
+    router.push("/auth/login");
+  };
 
-    // Close dropdown on outside click
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (isProfileOpen) {
-          const target = event.target as HTMLElement;
-          if (!target.closest(".profile-dropdown-container")) {
-            setIsProfileOpen(false);
-          }
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isProfileOpen) {
+        const target = event.target as HTMLElement;
+        if (!target.closest(".profile-dropdown-container")) {
+          setIsProfileOpen(false);
         }
-      };
-      document.addEventListener("click", handleClickOutside);
-      return () => document.removeEventListener("click", handleClickOutside);
-    }, [isProfileOpen]);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [isProfileOpen]);
 
   if (pathname?.startsWith("/auth")) return null;
 
@@ -169,7 +169,7 @@ export const Navbar = () => {
             {isLoggedIn ? (
               <div className="flex items-center gap-4">
                 <div className="relative profile-dropdown-container">
-                  <div 
+                  <div
                     onClick={() => setIsProfileOpen(!isProfileOpen)}
                     className="w-11 h-11 rounded-full border-[1.5px] p-0.5 cursor-pointer overflow-hidden transition-all border-[#17b9c1] hover:scale-105 active:scale-95"
                   >
@@ -212,7 +212,7 @@ export const Navbar = () => {
                             </Link>
                           ))}
                         </div>
-                        
+
                         <div className="mt-2 pt-2 border-t border-slate-50 px-2">
                           <button
                             onClick={handleLogout}
@@ -305,7 +305,7 @@ export const Navbar = () => {
             <div className="mt-auto flex flex-col gap-4">
               {isLoggedIn ? (
                 <>
-                  <PrimaryButton 
+                  <PrimaryButton
                     className="w-full bg-[#17b9c1] hover:bg-[#15a7ad] text-white rounded-[10px] h-12 font-semibold"
                     onClick={() => router.push("/services")}
                   >

@@ -15,11 +15,12 @@ export const CTASection = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative bg-slate-900 rounded-[3rem] p-12 md:p-20 overflow-hidden shadow-2xl"
+          className="relative bg-[#896dab] rounded-[3rem] p-12 md:p-20 overflow-hidden shadow-2xl"
         >
           {/* Decorative Background Elements */}
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
-          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-black/10 to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-black/10 to-transparent pointer-events-none" />
+          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" />
           
           <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
             <div className="max-w-2xl text-center lg:text-left">
@@ -28,7 +29,7 @@ export const CTASection = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-bold text-xs uppercase tracking-widest mb-6"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white font-bold text-xs uppercase tracking-widest mb-6"
               >
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 Join the marketplace
@@ -36,22 +37,22 @@ export const CTASection = () => {
               
               <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
                 Ready to find the <br className="hidden md:block" />
-                <span className="text-primary">perfect professional?</span>
+                <span className="text-white opacity-90">perfect professional?</span>
               </h2>
               
-              <p className="text-slate-400 text-lg md:text-xl mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="text-white/80 text-lg md:text-xl mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
                 Join thousands of satisfied users who trust Odaboo to connect them with the best local service providers.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
                 <Link href="/auth/confirm_auth">
-                  <PrimaryButton className="px-10 py-4 h-auto text-lg rounded-2xl group">
+                  <PrimaryButton className="px-10 py-4 h-auto text-lg rounded-2xl group shadow-xl shadow-primary/20">
                     Get Started Now
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </PrimaryButton>
                 </Link>
                 <Link href="#how-it-works">
-                  <button className="px-8 py-4 text-white font-bold hover:text-primary transition-colors flex items-center gap-2">
+                  <button className="px-8 py-4 text-white font-bold hover:opacity-80 transition-all flex items-center gap-2">
                     Learn how it works
                   </button>
                 </Link>
@@ -63,7 +64,7 @@ export const CTASection = () => {
                   "Secure Payments",
                   "24/7 Support",
                 ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 text-slate-300 text-sm font-medium">
+                  <div key={i} className="flex items-center gap-2 text-white/90 text-sm font-medium">
                     <CheckCircle2 className="w-4 h-4 text-primary" />
                     {item}
                   </div>
@@ -72,13 +73,13 @@ export const CTASection = () => {
             </div>
 
             <div className="relative group flex-shrink-0">
-              <div className="absolute -inset-4 bg-primary/20 rounded-full blur-2xl group-hover:bg-primary/30 transition-colors duration-700" />
+              <div className="absolute -inset-4 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors duration-700" />
               <motion.div
                 initial={{ rotate: -10, scale: 0.9 }}
                 whileInView={{ rotate: 0, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 60, damping: 20 }}
-                className="relative bg-white p-4 rounded-[2.5rem] shadow-2xl border border-slate-100"
+                className="relative bg-white p-4 rounded-[2.5rem] shadow-2xl border border-white/20"
               >
                 {/* Mockup of an app interface or card */}
                 <div className="w-64 h-80 bg-slate-50 rounded-[2rem] overflow-hidden flex flex-col">
