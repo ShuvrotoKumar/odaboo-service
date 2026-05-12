@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, Variants } from "framer-motion";
 import { Image as ImageIcon, Send, Heart, MessageCircle, Share2, MoreHorizontal } from "lucide-react";
 import { Container } from "@/components/Container";
@@ -65,6 +65,29 @@ const FEED_POSTS = [
 
 export default function FeedPage() {
     const [newPost, setNewPost] = useState("");
+    const [posts, setPosts] = useState(FEED_POSTS);
+
+    useEffect(() => {
+        const savedPostStr = localStorage.getItem('newOdabooPost');
+        if (savedPostStr) {
+            const savedPost = JSON.parse(savedPostStr);
+            const generatedPost = {
+                id: Date.now(),
+                author: {
+                    name: "You",
+                    role: "Looking for Services",
+                    avatar: "ME"
+                },
+                time: savedPost.time,
+                content: `Need a ${savedPost.category} service: ${savedPost.title}. Budget: ${savedPost.budget}. Location: ${savedPost.location}. Urgency: ${savedPost.urgency}. Details: ${savedPost.description}`,
+                likes: 0,
+                comments: 0,
+                isLiked: false
+            };
+            setPosts([generatedPost, ...FEED_POSTS]);
+            localStorage.removeItem('newOdabooPost'); // Clear it so it only shows once
+        }
+    }, []);
 
     return (
         <div className="min-h-screen bg-slate-50 pt-24 pb-20">
@@ -121,7 +144,7 @@ export default function FeedPage() {
                         </motion.div>
 
                         {/* Feed Posts */}
-                        {FEED_POSTS.map((post) => (
+                        {posts.map((post) => (
                             <motion.div
                                 key={post.id}
                                 variants={fadeInUp}

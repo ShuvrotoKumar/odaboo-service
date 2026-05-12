@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { 
     Send, 
     MapPin, 
@@ -21,6 +22,7 @@ import { Container } from "@/components/Container";
 import { cn } from "@/lib/utils";
 
 export default function PostRequirementPage() {
+    const router = useRouter();
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         title: "",
@@ -45,6 +47,12 @@ export default function PostRequirementPage() {
         setIsSubmitting(true);
         await new Promise(resolve => setTimeout(resolve, 2000));
         setIsSubmitting(false);
+
+        localStorage.setItem('newOdabooPost', JSON.stringify({
+            ...formData,
+            time: "Just now"
+        }));
+        router.push('/feed');
     };
 
     return (
@@ -141,7 +149,7 @@ export default function PostRequirementPage() {
                                                         required
                                                         type="text" 
                                                         placeholder="e.g. Need an electrician for panel upgrade"
-                                                        className="w-full px-0 py-4 bg-transparent border-b-2 border-slate-100 text-2xl font-black placeholder:text-slate-200 focus:border-[#17b9c1] transition-all outline-none"
+                                                        className="w-full px-0 py-4 bg-transparent border-b-2 border-slate-100 text-2xl font-black placeholder:text-slate-200 focus:border-[#17b9c1] transition-all outline-none text-slate-900"
                                                         value={formData.title}
                                                         onChange={(e) => setFormData({...formData, title: e.target.value})}
                                                     />
@@ -215,7 +223,7 @@ export default function PostRequirementPage() {
                                                         required
                                                         rows={6}
                                                         placeholder="Tell us more about the job details..."
-                                                        className="w-full px-8 py-6 bg-slate-50/50 border-2 border-transparent rounded-[2rem] text-[15px] font-bold focus:bg-white focus:border-[#17b9c1]/10 transition-all outline-none resize-none placeholder:text-slate-300"
+                                                        className="w-full px-8 py-6 bg-slate-50/50 border-2 border-transparent rounded-[2rem] text-[15px] font-bold focus:bg-white focus:border-[#17b9c1]/10 transition-all outline-none resize-none placeholder:text-slate-300 text-slate-900"
                                                         value={formData.description}
                                                         onChange={(e) => setFormData({...formData, description: e.target.value})}
                                                     />
@@ -310,7 +318,7 @@ const ModernInput = ({ label, icon: Icon, placeholder, value, onChange, type = "
                 <div className="relative">
                     <select 
                         required
-                        className="w-full pl-12 pr-10 py-3.5 bg-slate-50/50 border-none rounded-xl text-[15px] font-bold appearance-none focus:bg-white focus:ring-4 focus:ring-[#17b9c1]/5 transition-all outline-none cursor-pointer text-slate-700"
+                        className="w-full pl-12 pr-10 py-3.5 bg-slate-50/50 border-none rounded-xl text-[15px] font-bold appearance-none focus:bg-white focus:ring-4 focus:ring-[#17b9c1]/5 transition-all outline-none cursor-pointer text-slate-900"
                         value={value}
                         onChange={(e) => onChange(e.target.value)}
                     >
@@ -326,7 +334,7 @@ const ModernInput = ({ label, icon: Icon, placeholder, value, onChange, type = "
                     required
                     type="text" 
                     placeholder={placeholder}
-                    className="w-full pl-12 pr-6 py-3.5 bg-slate-50/50 border-none rounded-xl text-[14px] font-bold focus:bg-white focus:ring-4 focus:ring-[#17b9c1]/5 transition-all outline-none placeholder:text-slate-300"
+                    className="w-full pl-12 pr-6 py-3.5 bg-slate-50/50 border-none rounded-xl text-[14px] font-bold focus:bg-white focus:ring-4 focus:ring-[#17b9c1]/5 transition-all outline-none placeholder:text-slate-300 text-slate-900"
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                 />
