@@ -10,7 +10,8 @@ import {
   Mail, 
   MapPin, 
   ArrowRight, 
-  Send 
+  Send,
+  Sparkles 
 } from "lucide-react";
 
 // Social icons as SVG components to avoid missing exports in old lucide-react versions
@@ -133,95 +134,127 @@ export const Footer = () => {
         </div>
 
         {/* Newsletter & Contact Section */}
-        <div className="relative group/newsletter p-8 md:p-12 bg-white/[0.02] border border-white/5 rounded-[3rem] backdrop-blur-sm mb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
-            <div className="lg:col-span-2 flex flex-col xl:flex-row items-center gap-10">
-              <div className="flex-shrink-0 text-center xl:text-left">
-                <div className="flex items-center justify-center xl:justify-start gap-2 mb-3">
-                  <div className="w-8 h-px bg-primary/50" />
-                  <span className="text-primary text-xs font-bold uppercase tracking-[0.2em]">Newsletter</span>
-                </div>
-                <h4 className="text-3xl font-bold text-white mb-2 tracking-tight">Stay in the loop</h4>
-                <p className="text-slate-500 max-w-sm">Get expert tips and exclusive service offers delivered to your inbox.</p>
+        <div className="relative p-10 md:p-14 bg-white/[0.02] border border-white/5 rounded-[3.5rem] backdrop-blur-sm mb-20 overflow-hidden">
+          {/* Decorative background glow */}
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none" />
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            {/* Left: Headline */}
+            <div className="lg:col-span-4 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+                <Sparkles className="w-3 h-3" />
+                <span>Join our community</span>
               </div>
-
-              <div className="flex-grow w-full max-w-xl relative">
-                <div className="relative group">
-                  <input
-                    type="email"
-                    placeholder="Enter your work email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-slate-900/50 border border-white/10 rounded-2xl px-7 py-5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-white placeholder:text-slate-600 text-lg shadow-inner"
-                  />
-                  <div className="absolute right-2 top-2 bottom-2">
-                    <button
-                      onClick={handleSubscribe}
-                      className="h-full bg-primary hover:bg-primary/90 text-white rounded-xl px-8 flex items-center gap-3 font-bold transition-all active:scale-95 shadow-lg shadow-primary/20 group/btn overflow-hidden relative"
-                    >
-                      <AnimatePresence mode="wait">
-                        {subscribed ? (
-                          <motion.div
-                            key="success"
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: -20, opacity: 0 }}
-                            className="flex items-center gap-2"
-                          >
-                            <span>Success!</span>
-                          </motion.div>
-                        ) : (
-                          <motion.div
-                            key="idle"
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: -20, opacity: 0 }}
-                            className="flex items-center gap-2"
-                          >
-                            <span>Subscribe</span>
-                            <Send className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <h4 className="text-3xl md:text-4xl font-extrabold text-white mb-4 tracking-tight leading-tight">
+                Stay in <br className="hidden xl:block" /> the loop
+              </h4>
+              <p className="text-slate-500 text-sm leading-relaxed max-w-xs mx-auto lg:mx-0">
+                Get expert tips and exclusive service offers delivered to your inbox weekly.
+              </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row lg:flex-col gap-8 justify-center lg:justify-end lg:pl-12 lg:border-l border-white/5">
-              <a href="tel:+1234567890" className="flex items-center gap-5 group/item">
-                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-white transition-all duration-500 shadow-sm group-hover/item:shadow-primary/20 group-hover/item:scale-110">
-                  <Phone className="w-6 h-6" />
+            {/* Middle: Subscription Form */}
+            <div className="lg:col-span-5">
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-purple-600/20 rounded-2xl blur opacity-25 group-focus-within:opacity-100 transition duration-1000 group-focus-within:duration-200" />
+                <div className="relative flex flex-col sm:flex-row gap-3">
+                  <div className="relative flex-grow">
+                    <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within:text-primary transition-colors" />
+                    <input
+                      type="email"
+                      placeholder="Your email address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full bg-slate-900/80 border border-white/10 rounded-2xl pl-14 pr-6 py-5 outline-none focus:border-primary/50 transition-all text-white placeholder:text-slate-600 shadow-2xl"
+                    />
+                  </div>
+                  <button
+                    onClick={handleSubscribe}
+                    className="sm:w-auto w-full bg-primary hover:bg-primary/90 text-white rounded-2xl px-8 py-5 flex items-center justify-center gap-2 font-bold transition-all active:scale-95 shadow-xl shadow-primary/20 group/btn"
+                  >
+                    <AnimatePresence mode="wait">
+                      {subscribed ? (
+                        <motion.span
+                          key="success"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                        >
+                          Success!
+                        </motion.span>
+                      ) : (
+                        <motion.div
+                          key="idle"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="flex items-center gap-2"
+                        >
+                          <span>Subscribe</span>
+                          <Send className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </button>
+                </div>
+              </div>
+              <p className="mt-4 text-[11px] text-slate-600 text-center lg:text-left">
+                We care about your data. Read our <Link href="/privacy" className="text-slate-400 hover:text-primary transition-colors">Privacy Policy</Link>.
+              </p>
+            </div>
+
+            {/* Right: Contact Info */}
+            <div className="lg:col-span-3 flex flex-col gap-6 lg:pl-10 lg:border-l border-white/5">
+              <a href="tel:+1234567890" className="flex items-center gap-4 group/item">
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-white transition-all duration-500">
+                  <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Call Us</p>
-                  <span className="text-lg font-bold text-slate-200 group-hover/item:text-white transition-colors">+1 (234) 567-890</span>
+                  <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Call us</p>
+                  <p className="text-sm font-bold text-slate-300 group-hover/item:text-white transition-colors">+1 (234) 567-890</p>
                 </div>
               </a>
-              <a href="mailto:hello@odaboo.com" className="flex items-center gap-5 group/item">
-                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-white transition-all duration-500 shadow-sm group-hover/item:shadow-primary/20 group-hover/item:scale-110">
-                  <Mail className="w-6 h-6" />
+              <a href="mailto:hello@odaboo.com" className="flex items-center gap-4 group/item">
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-white transition-all duration-500">
+                  <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Email Us</p>
-                  <span className="text-lg font-bold text-slate-200 group-hover/item:text-white transition-colors">hello@odaboo.com</span>
+                  <p className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">Email us</p>
+                  <p className="text-sm font-bold text-slate-300 group-hover/item:text-white transition-colors">hello@odaboo.com</p>
                 </div>
               </a>
             </div>
           </div>
         </div>
+
 
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm">
-          <p>© {new Date().getFullYear()} Odaboo Service Marketplace. All rights reserved.</p>
+        <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[13px] font-medium text-slate-500">
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
+            <p>© {new Date().getFullYear()} Odaboo Service Marketplace.</p>
+            <div className="hidden md:block w-1 h-1 rounded-full bg-slate-800" />
+            <p>Made with passion for local services.</p>
+          </div>
+          
           <div className="flex items-center gap-8">
-            <Link href="/terms" className="hover:text-primary transition-colors">Terms</Link>
-            <Link href="/privacy" className="hover:text-primary transition-colors">Privacy</Link>
-            <Link href="/cookies" className="hover:text-primary transition-colors">Cookies</Link>
+            {[
+              { name: "Terms", href: "/terms" },
+              { name: "Privacy", href: "/privacy" },
+              { name: "Cookies", href: "/cookies" },
+            ].map((link) => (
+              <Link 
+                key={link.name}
+                href={link.href} 
+                className="relative group py-1"
+              >
+                <span className="hover:text-slate-300 transition-colors">{link.name}</span>
+                <span className="absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
+              </Link>
+            ))}
           </div>
         </div>
+
       </Container>
     </footer>
   );
