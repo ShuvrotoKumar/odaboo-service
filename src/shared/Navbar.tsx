@@ -138,16 +138,19 @@ export const Navbar = () => {
             </Link>
 
             {/* Nav Links */}
-            <div className="hidden xl:flex items-center gap-10">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-[15px] font-[800] transition-colors whitespace-nowrap text-slate-800 hover:text-primary tracking-tight"
-                >
-                  {link.name}
-                </Link>
-              ))}
+            <div className="hidden xl:flex items-center gap-10 ml-10">
+              {NAV_LINKS.map((link) => {
+                if (link.name === "Feed" && !isLoggedIn) return null;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="text-[15px] font-[800] transition-colors whitespace-nowrap text-slate-800 hover:text-primary tracking-tight"
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
@@ -230,7 +233,7 @@ export const Navbar = () => {
                 </div>
 
                 <PrimaryButton
-                  onClick={() => router.push("/services")}
+                  onClick={() => router.push("/post")}
                   className="rounded-[10px] px-6 h-11 text-[15px] font-semibold transition-all bg-[#17b9c1] hover:bg-[#15a7ad] text-white shadow-none border-none flex items-center justify-center whitespace-nowrap"
                 >
                   Post your requirements
@@ -290,16 +293,19 @@ export const Navbar = () => {
             </div>
 
             <div className="flex flex-col gap-8 mb-10">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-2xl font-[900] text-slate-900 hover:text-primary transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {NAV_LINKS.map((link) => {
+                if (link.name === "Feed" && !isLoggedIn) return null;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="text-2xl font-[900] text-slate-900 hover:text-primary transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
             </div>
 
             <div className="mt-auto flex flex-col gap-4">
@@ -307,7 +313,10 @@ export const Navbar = () => {
                 <>
                   <PrimaryButton
                     className="w-full bg-[#17b9c1] hover:bg-[#15a7ad] text-white rounded-[10px] h-12 font-semibold"
-                    onClick={() => router.push("/services")}
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      router.push("/post");
+                    }}
                   >
                     Post your requirements
                   </PrimaryButton>

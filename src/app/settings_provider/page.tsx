@@ -211,7 +211,16 @@ const ProfileSection = ({ profile, setProfile }: { profile: ProviderProfile, set
     );
 };
 
-const InputGroup = ({ label, value, onChange, isEditing, icon: Icon, disabled = false }: any) => (
+interface InputGroupProps {
+    label: string;
+    value: string;
+    onChange?: (value: string) => void;
+    isEditing: boolean;
+    icon: React.ElementType;
+    disabled?: boolean;
+}
+
+const InputGroup = ({ label, value, onChange, isEditing, icon: Icon, disabled = false }: InputGroupProps) => (
     <div className="space-y-1.5">
         <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">{label}</label>
         <div className="relative group">

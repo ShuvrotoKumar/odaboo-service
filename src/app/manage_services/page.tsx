@@ -9,7 +9,11 @@ import {
     ToggleLeft, 
     ToggleRight, 
     AlertCircle,
-    Check
+    Check,
+    X,
+    DollarSign,
+    Briefcase,
+    AlignCenter
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/Container";
@@ -25,6 +29,13 @@ const INITIAL_SERVICES = [
 export default function ManageServicesPage() {
     const [services, setServices] = useState(INITIAL_SERVICES);
     const [searchQuery, setSearchQuery] = useState("");
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+    const [newService, setNewService] = useState({
+        name: "",
+        category: "",
+        price: "",
+        description: ""
+    });
 
     const toggleStatus = (id: number) => {
         setServices(services.map(s => 
@@ -34,6 +45,19 @@ export default function ManageServicesPage() {
 
     const deleteService = (id: number) => {
         setServices(services.filter(s => s.id !== id));
+    };
+
+    const handleCreateService = (e: React.FormEvent) => {
+        e.preventDefault();
+        const id = services.length > 0 ? Math.max(...services.map(s => s.id)) + 1 : 1;
+        setServices([...services, { 
+            ...newService, 
+            id, 
+            price: parseFloat(newService.price), 
+            status: "active" 
+        } as any]);
+        setNewService({ name: "", category: "", price: "", description: "" });
+        setIsCreateModalOpen(false);
     };
 
     const filteredServices = services.filter(s => 
@@ -51,7 +75,10 @@ export default function ManageServicesPage() {
                         <p className="text-lg text-slate-400 font-medium leading-relaxed">Control your service offerings and pricing</p>
                     </div>
                     
-                    <button className="w-full lg:w-fit px-10 bg-[#17b9c1] text-white py-3 rounded-2xl font-black text-[13px] shadow-xl shadow-[#17b9c1]/20 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2">
+                    <button 
+                        onClick={() => setIsCreateModalOpen(true)}
+                        className="w-full lg:w-fit px-10 bg-[#17b9c1] text-white py-3 rounded-2xl font-black text-[13px] shadow-xl shadow-[#17b9c1]/20 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+                    >
                         <Plus className="w-4 h-4" />
                         Add New Service
                     </button>
@@ -142,6 +169,126 @@ export default function ManageServicesPage() {
                         )}
                     </AnimatePresence>
                 </div>
+
+                {/* Create Service Modal */}
+                <AnimatePresence>
+                    {isCreateModalOpen && (
+                        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                            <motion.div 
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setIsCreateModalOpen(false)}
+                                className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+                            />
+                            <motion.div 
+                                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                                className="relative w-full max-w-2xl bg-white rounded-[3rem] shadow-2xl overflow-hidden"
+                            >
+                                {/* Modal Header */}
+                                <div className="px-10 py-8 border-b border-slate-50 flex items-center justify-between">
+                                    <div className="space-y-1">
+                                        <h2 className="text-2xl font-black text-slate-800 tracking-tight">Create Service</h2>
+                                        <p className="text-sm text-slate-400 font-bold">List a new offering for your clients</p>
+                                    </div>
+                                    <button 
+                                        onClick={() => setIsCreateModalOpen(false)}
+                                        className="p-3 bg-slate-50 text-slate-400 hover:text-slate-800 rounded-2xl transition-all"
+                                    >
+                                        <X className="w-5 h-5" />
+                                    </button>
+                                </div>
+
+                                <form onSubmit={handleCreateService} className="p-10 space-y-8">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                        {/* Service Name */}
+                                        <div className="space-y-3">
+                                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Service Name</label>
+                                            <div className="relative group">
+                                                <Briefcase className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-[#17b9c1] transition-colors" />
+                                                <input 
+                                                    required
+                                                    type="text" 
+                                                    placeholder="e.g. Home Wiring"
+                                                    value={newService.name}
+                                                    onChange={(e) => setNewService({...newService, name: e.target.value})}
+                                                    className="w-full pl-14 pr-6 py-4 bg-slate-50/50 border-none rounded-2xl text-[14px] font-bold focus:outline-none focus:ring-4 focus:ring-[#17b9c1]/5 focus:bg-white transition-all placeholder:text-slate-300"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Category */}
+                                        <div className="space-y-3">
+                                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Category</label>
+                                            <div className="relative group">
+                                                <AlignCenter className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-[#17b9c1] transition-colors" />
+                                                <select 
+                                                    required
+                                                    value={newService.category}
+                                                    onChange={(e) => setNewService({...newService, category: e.target.value})}
+                                                    className="w-full pl-14 pr-6 py-4 bg-slate-50/50 border-none rounded-2xl text-[14px] font-bold focus:outline-none focus:ring-4 focus:ring-[#17b9c1]/5 focus:bg-white transition-all appearance-none cursor-pointer text-slate-700"
+                                                >
+                                                    <option value="" disabled>Select Category</option>
+                                                    <option value="Electrical">Electrical</option>
+                                                    <option value="Automation">Automation</option>
+                                                    <option value="Plumbing">Plumbing</option>
+                                                    <option value="Cleaning">Cleaning</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        {/* Price */}
+                                        <div className="space-y-3">
+                                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Price per Hour</label>
+                                            <div className="relative group">
+                                                <DollarSign className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 group-focus-within:text-[#17b9c1] transition-colors" />
+                                                <input 
+                                                    required
+                                                    type="number" 
+                                                    placeholder="0.00"
+                                                    value={newService.price}
+                                                    onChange={(e) => setNewService({...newService, price: e.target.value})}
+                                                    className="w-full pl-14 pr-6 py-4 bg-slate-50/50 border-none rounded-2xl text-[14px] font-bold focus:outline-none focus:ring-4 focus:ring-[#17b9c1]/5 focus:bg-white transition-all placeholder:text-slate-300"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Description */}
+                                        <div className="md:col-span-2 space-y-3">
+                                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Service Description</label>
+                                            <textarea 
+                                                placeholder="Describe what's included in this service..."
+                                                rows={4}
+                                                value={newService.description}
+                                                onChange={(e) => setNewService({...newService, description: e.target.value})}
+                                                className="w-full px-6 py-4 bg-slate-50/50 border-none rounded-3xl text-[14px] font-bold focus:outline-none focus:ring-4 focus:ring-[#17b9c1]/5 focus:bg-white transition-all placeholder:text-slate-300 resize-none"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Modal Footer */}
+                                    <div className="pt-4 flex items-center gap-4">
+                                        <button 
+                                            type="submit"
+                                            className="flex-grow bg-[#17b9c1] text-white py-4 rounded-2xl font-black text-sm shadow-xl shadow-[#17b9c1]/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                                        >
+                                            Launch Service
+                                        </button>
+                                        <button 
+                                            type="button"
+                                            onClick={() => setIsCreateModalOpen(false)}
+                                            className="px-10 bg-slate-50 text-slate-400 py-4 rounded-2xl font-black text-sm hover:bg-slate-100 hover:text-slate-600 transition-all"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </form>
+                            </motion.div>
+                        </div>
+                    )}
+                </AnimatePresence>
             </Container>
         </div>
     );
