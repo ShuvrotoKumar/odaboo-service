@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { Search, Filter, ChevronLeft, ChevronRight, X, Sparkles, SlidersHorizontal, Info } from 'lucide-react';
 import { CTASection } from '@/sections/CTASection';
 import { Container } from '@/components/Container';
@@ -10,7 +10,7 @@ import { SERVICES } from '@/data/mock';
 import { cn } from '@/lib/utils';
 
 // --- Animations ---
-const fadeInUp = {
+const fadeInUp: Variants = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: -20 }
@@ -39,7 +39,7 @@ const SearchSection = ({ onSearch }: { onSearch: (term: string) => void }) => {
                 <motion.div 
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    transition={{ duration: 0.6 }}
                     className="text-center mb-16"
                 >
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-50 text-purple-600 text-sm font-bold mb-6">

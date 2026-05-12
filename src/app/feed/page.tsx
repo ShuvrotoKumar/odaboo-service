@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Image as ImageIcon, Send, Heart, MessageCircle, Share2, MoreHorizontal } from "lucide-react";
 import { Container } from "@/components/Container";
 import { cn } from "@/lib/utils";
 
 // --- Animation Variants ---
-const fadeInUp = {
+const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
 };
 
 const staggerContainer = {
