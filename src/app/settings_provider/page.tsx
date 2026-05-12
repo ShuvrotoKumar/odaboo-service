@@ -182,6 +182,13 @@ const ProfileSection = ({ profile, setProfile }: { profile: ProviderProfile, set
                         <div className="w-40 h-40 rounded-3xl overflow-hidden border-4 border-slate-50 shadow-xl">
                             <Image src={profile.avatar} alt={profile.name} width={160} height={160} className="w-full h-full object-cover" />
                         </div>
+                        {isEditing && (
+                            <label className="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white rounded-3xl cursor-pointer">
+                                <input type="file" className="hidden" accept="image/*" />
+                                <Image className="w-6 h-6 mb-2" src="/Logo.png" alt="Upload" width={24} height={24} />
+                                <span className="text-[10px] font-bold uppercase tracking-wider">Change Photo</span>
+                            </label>
+                        )}
                     </div>
                     <p className="mt-4 text-[11px] text-slate-400 font-bold uppercase tracking-widest text-center">Profile Photo</p>
                 </div>

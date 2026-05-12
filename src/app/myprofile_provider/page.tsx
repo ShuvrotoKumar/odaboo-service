@@ -75,9 +75,10 @@ export default function ProviderProfilePage() {
                                         className="object-cover"
                                     />
                                 </div>
-                                <button className="absolute bottom-3 right-3 p-2.5 bg-[#17b9c1] text-white rounded-2xl shadow-xl border-4 border-white hover:scale-110 active:scale-95 transition-all">
+                                <label className="absolute bottom-3 right-3 p-2.5 bg-[#17b9c1] text-white rounded-2xl shadow-xl border-4 border-white hover:scale-110 active:scale-95 transition-all cursor-pointer">
+                                    <input type="file" className="hidden" accept="image/*" />
                                     <Camera className="w-4 h-4" />
-                                </button>
+                                </label>
                             </div>
 
                             <div className="flex items-center justify-center gap-2 mb-1.5">
@@ -319,9 +320,10 @@ const EditProfileModal = ({ onClose, data }: { onClose: () => void, data: any })
                             <div className="w-full h-full rounded-2xl overflow-hidden border-4 border-white shadow-md">
                                 <Image src={data.avatar} alt="Avatar" fill className="object-cover" />
                             </div>
-                            <button className="absolute -bottom-2 -right-2 p-2 bg-[#17b9c1] text-white rounded-xl shadow-lg border-2 border-white hover:scale-110 transition-transform">
+                            <label className="absolute -bottom-2 -right-2 p-2 bg-[#17b9c1] text-white rounded-xl shadow-lg border-2 border-white hover:scale-110 transition-transform cursor-pointer">
+                                <input type="file" className="hidden" accept="image/*" id="modal-photo" />
                                 <Camera className="w-4 h-4" />
-                            </button>
+                            </label>
                         </div>
                         <div className="space-y-1">
                             <h4 className="font-black text-slate-800">Profile Photo</h4>
@@ -329,7 +331,7 @@ const EditProfileModal = ({ onClose, data }: { onClose: () => void, data: any })
                                 Upload a high-quality photo to build trust with clients. Max size 5MB.
                             </p>
                             <div className="flex gap-2 pt-2">
-                                <button className="text-[11px] font-black text-[#17b9c1] hover:underline uppercase tracking-wider">Change Photo</button>
+                                <label htmlFor="modal-photo" className="text-[11px] font-black text-[#17b9c1] hover:underline uppercase tracking-wider cursor-pointer">Change Photo</label>
                                 <span className="text-slate-300">•</span>
                                 <button className="text-[11px] font-black text-red-400 hover:underline uppercase tracking-wider">Remove</button>
                             </div>

@@ -123,10 +123,13 @@ export default function FeedPage() {
                                         className="w-full bg-slate-50 rounded-xl border-none p-4 text-slate-900 focus:ring-2 focus:ring-purple-600 focus:bg-white transition-all resize-none min-h-[100px]"
                                     />
                                     <div className="flex items-center justify-between mt-4">
-                                        <button className="flex items-center gap-2 text-slate-500 hover:text-purple-600 transition-colors px-3 py-2 rounded-lg hover:bg-purple-50">
-                                            <ImageIcon className="w-5 h-5" />
-                                            <span className="text-sm font-medium">Photo</span>
-                                        </button>
+                                        <div>
+                                            <input type="file" id="feed-photo" className="hidden" accept="image/*" />
+                                            <label htmlFor="feed-photo" className="flex items-center gap-2 text-slate-500 hover:text-purple-600 transition-colors px-3 py-2 rounded-lg hover:bg-purple-50 cursor-pointer">
+                                                <ImageIcon className="w-5 h-5" />
+                                                <span className="text-sm font-medium">Photo</span>
+                                            </label>
+                                        </div>>
                                         <button
                                             className={cn(
                                                 "flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm transition-all",

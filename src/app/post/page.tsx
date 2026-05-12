@@ -228,13 +228,16 @@ export default function PostRequirementPage() {
                                                         onChange={(e) => setFormData({...formData, description: e.target.value})}
                                                     />
                                                 </div>
-                                                <button 
-                                                    type="button"
-                                                    className="flex items-center gap-3 px-8 py-4 bg-slate-50 text-slate-500 rounded-2xl font-bold text-sm hover:bg-slate-100 transition-all border border-dashed border-slate-200"
-                                                >
-                                                    <ImageIcon className="w-5 h-5" />
-                                                    Attach Job Photos (Optional)
-                                                </button>
+                                                <div className="relative">
+                                                    <input type="file" id="job-photos" className="hidden" multiple accept="image/*" />
+                                                    <label 
+                                                        htmlFor="job-photos"
+                                                        className="flex items-center w-fit gap-3 px-8 py-4 bg-slate-50 text-slate-500 rounded-2xl font-bold text-sm hover:bg-slate-100 transition-all border border-dashed border-slate-200 cursor-pointer"
+                                                    >
+                                                        <ImageIcon className="w-5 h-5" />
+                                                        Attach Job Photos (Optional)
+                                                    </label>
+                                                </div>
                                             </motion.div>
                                         )}
                                     </AnimatePresence>

@@ -70,9 +70,10 @@ export default function MyProfileCustomerPage() {
                                         className="object-cover"
                                     />
                                 </div>
-                                <button className="absolute bottom-3 right-3 p-2.5 bg-[#17b9c1] text-white rounded-2xl shadow-xl border-4 border-white hover:scale-110 active:scale-95 transition-all">
+                                <label className="absolute bottom-3 right-3 p-2.5 bg-[#17b9c1] text-white rounded-2xl shadow-xl border-4 border-white hover:scale-110 active:scale-95 transition-all cursor-pointer">
+                                    <input type="file" className="hidden" accept="image/*" />
                                     <Camera className="w-4 h-4" />
-                                </button>
+                                </label>
                             </div>
 
                             <div className="flex items-center justify-center gap-2 mb-1.5">
