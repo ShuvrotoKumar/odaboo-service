@@ -92,9 +92,13 @@ export default function MyProfileCustomerPage() {
                                     </div>
                                 )}
                             </div>
-                            <p className="text-sm font-bold text-slate-400 mb-8 max-w-[240px] mx-auto leading-relaxed">
+                            <p className="text-sm font-bold text-slate-400 mb-3 max-w-[240px] mx-auto leading-relaxed">
                                 {customerData.profession}
                             </p>
+                            <div className="flex items-center justify-center gap-1 text-[#17b9c1] mb-8">
+                                <MapPin className="w-3.5 h-3.5" />
+                                <span className="text-[11px] font-black uppercase tracking-widest">{customerData.location}</span>
+                            </div>
                             
                             <div className="space-y-4">
                                 <PrimaryButton 
@@ -235,7 +239,9 @@ export default function MyProfileCustomerPage() {
                 data={{
                     name: customerData.name,
                     profession: customerData.profession,
-                    bio: customerData.bio
+                    bio: customerData.bio,
+                    location: customerData.location,
+                    avatar: customerData.avatar
                 }}
                 onSave={handleUpdateProfile}
             />
