@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { 
     Star, 
@@ -21,9 +21,10 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/Container";
 import { PrimaryButton } from "@/components/PrimaryButton";
 import { cn } from "@/lib/utils";
+import { EditProfileModal } from "@/components/EditProfileModal";
 
 // Dummy Data
-const CUSTOMER_DATA = {
+const INITIAL_CUSTOMER_DATA = {
     name: "Shuvroto Kumar",
     profession: "Premium Customer",
     totalBookings: 24,
@@ -49,6 +50,13 @@ const CUSTOMER_DATA = {
 };
 
 export default function MyProfileCustomerPage() {
+    const [customerData, setCustomerData] = useState(INITIAL_CUSTOMER_DATA);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+    const handleUpdateProfile = (newData: any) => {
+        setCustomerData(prev => ({ ...prev, ...newData }));
+    };
+
     return (
         <div className="min-h-screen bg-white pt-32 pb-20">
             <Container>
@@ -64,8 +72,8 @@ export default function MyProfileCustomerPage() {
                             <div className="relative mx-auto w-36 h-36 md:w-44 md:h-44 mb-6">
                                 <div className="w-full h-full rounded-[2.5rem] overflow-hidden border-4 border-slate-50 shadow-xl">
                                     <Image 
-                                        src={CUSTOMER_DATA.avatar} 
-                                        alt={CUSTOMER_DATA.name}
+                                        src={customerData.avatar} 
+                                        alt={customerData.name}
                                         fill
                                         className="object-cover"
                                     />
@@ -77,19 +85,22 @@ export default function MyProfileCustomerPage() {
                             </div>
 
                             <div className="flex items-center justify-center gap-2 mb-1.5">
-                                <h1 className="text-2xl font-black text-slate-800 tracking-tight">{CUSTOMER_DATA.name}</h1>
-                                {CUSTOMER_DATA.verified && (
+                                <h1 className="text-2xl font-black text-slate-800 tracking-tight">{customerData.name}</h1>
+                                {customerData.verified && (
                                     <div className="bg-[#17b9c1]/10 p-1 rounded-full">
                                         <ShieldCheck className="w-5 h-5 text-[#17b9c1]" />
                                     </div>
                                 )}
                             </div>
                             <p className="text-sm font-bold text-slate-400 mb-8 max-w-[240px] mx-auto leading-relaxed">
-                                {CUSTOMER_DATA.profession}
+                                {customerData.profession}
                             </p>
                             
                             <div className="space-y-4">
-                                <PrimaryButton className="w-full py-4 rounded-2xl flex items-center justify-center gap-2 text-base font-bold shadow-xl shadow-[#17b9c1]/20">
+                                <PrimaryButton 
+                                    onClick={() => setIsEditModalOpen(true)}
+                                    className="w-full py-4 rounded-2xl flex items-center justify-center gap-2 text-base font-bold shadow-xl shadow-[#17b9c1]/20"
+                                >
                                     <Edit2 className="w-4 h-4" />
                                     Edit Profile
                                 </PrimaryButton>
@@ -109,9 +120,9 @@ export default function MyProfileCustomerPage() {
                         >
                             <h3 className="text-xs font-black text-[#17b9c1] mb-8 uppercase tracking-[0.2em]">Booking Activity</h3>
                             <div className="space-y-6">
-                                <StatItem icon={ShoppingBag} label="Total Orders" value={CUSTOMER_DATA.totalBookings} color="text-blue-500" />
-                                <StatItem icon={CheckCircle2} label="Completed" value={CUSTOMER_DATA.completedBookings} color="text-green-500" />
-                                <StatItem icon={Star} label="Reviews Given" value={CUSTOMER_DATA.reviewsGiven} color="text-orange-500" />
+                                <StatItem icon={ShoppingBag} label="Total Orders" value={customerData.totalBookings} color="text-blue-500" />
+                                <StatItem icon={CheckCircle2} label="Completed" value={customerData.completedBookings} color="text-green-500" />
+                                <StatItem icon={Star} label="Reviews Given" value={customerData.reviewsGiven} color="text-orange-500" />
                                 <StatItem icon={Calendar} label="Member Since" value="May 2024" color="text-[#17b9c1]" />
                             </div>
                         </motion.div>
@@ -131,7 +142,7 @@ export default function MyProfileCustomerPage() {
                                 <h2 className="text-2xl font-black text-slate-800 tracking-tight">Personal Bio</h2>
                             </div>
                             <p className="text-slate-500 text-lg leading-relaxed font-medium">
-                                {CUSTOMER_DATA.bio}
+                                {customerData.bio}
                             </p>
                         </motion.div>
 
@@ -144,7 +155,7 @@ export default function MyProfileCustomerPage() {
                         >
                             <h2 className="text-2xl font-black text-slate-800 tracking-tight mb-8">Favorite Categories</h2>
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                                {CUSTOMER_DATA.favoriteCategories.map((cat, i) => (
+                                {customerData.favoriteCategories.map((cat, i) => (
                                     <div key={i} className="group p-5 bg-slate-50 rounded-3xl border border-transparent hover:border-[#17b9c1]/20 hover:bg-white transition-all duration-300 text-center">
                                         <div className="w-12 h-12 mx-auto rounded-2xl bg-white flex items-center justify-center text-[#17b9c1] shadow-sm mb-3 group-hover:scale-110 transition-transform">
                                             <cat.icon className="w-6 h-6" />
@@ -167,7 +178,7 @@ export default function MyProfileCustomerPage() {
                                 <button className="text-sm font-bold text-[#17b9c1] hover:underline">View All</button>
                             </div>
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-                                {CUSTOMER_DATA.favoritePros.map((pro, i) => (
+                                {customerData.favoritePros.map((pro, i) => (
                                     <div key={i} className="flex flex-col items-center group cursor-pointer">
                                         <div className="w-20 h-20 rounded-[1.5rem] overflow-hidden mb-3 border-2 border-slate-50 shadow-md group-hover:scale-105 transition-transform duration-300">
                                             <Image 
@@ -217,6 +228,17 @@ export default function MyProfileCustomerPage() {
 
                 </div>
             </Container>
+
+            <EditProfileModal 
+                isOpen={isEditModalOpen} 
+                onClose={() => setIsEditModalOpen(false)}
+                data={{
+                    name: customerData.name,
+                    profession: customerData.profession,
+                    bio: customerData.bio
+                }}
+                onSave={handleUpdateProfile}
+            />
         </div>
     );
 }
