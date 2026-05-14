@@ -57,6 +57,17 @@ export default function MyProfileCustomerPage() {
         setCustomerData(prev => ({ ...prev, ...newData }));
     };
 
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setCustomerData(prev => ({ ...prev, avatar: reader.result as string }));
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-white pt-32 pb-20">
             <Container>
@@ -79,7 +90,12 @@ export default function MyProfileCustomerPage() {
                                     />
                                 </div>
                                 <label className="absolute bottom-3 right-3 p-2.5 bg-[#17b9c1] text-white rounded-2xl shadow-xl border-4 border-white hover:scale-110 active:scale-95 transition-all cursor-pointer">
-                                    <input type="file" className="hidden" accept="image/*" />
+                                    <input 
+                                        type="file" 
+                                        className="hidden" 
+                                        accept="image/*" 
+                                        onChange={handleImageChange}
+                                    />
                                     <Camera className="w-4 h-4" />
                                 </label>
                             </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Camera } from "lucide-react";
@@ -21,10 +21,28 @@ interface EditProfileModalProps {
 
 export function EditProfileModal({ isOpen, onClose, data, onSave }: EditProfileModalProps) {
     const [formData, setFormData] = useState(data);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (isOpen) {
+            setFormData(data);
+        }
+    }, [isOpen, data]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setFormData(prev => ({ ...prev, avatar: reader.result as string }));
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -80,7 +98,13 @@ export function EditProfileModal({ isOpen, onClose, data, onSave }: EditProfileM
                                             />
                                         </div>
                                         <label className="absolute -bottom-2 -right-2 p-2 bg-[#17b9c1] text-white rounded-xl shadow-lg border-2 border-white hover:scale-110 active:scale-95 transition-all cursor-pointer">
-                                            <input type="file" className="hidden" accept="image/*" />
+                                            <input 
+                                                type="file" 
+                                                className="hidden" 
+                                                accept="image/*" 
+                                                ref={fileInputRef}
+                                                onChange={handleImageChange}
+                                            />
                                             <Camera className="w-4 h-4" />
                                         </label>
                                     </div>
@@ -89,7 +113,11 @@ export function EditProfileModal({ isOpen, onClose, data, onSave }: EditProfileM
                                         <p className="text-xs text-slate-400 font-bold leading-relaxed">
                                             Upload a high-quality photo. Max size 5MB.
                                         </p>
-                                        <button type="button" className="text-[10px] font-black text-[#17b9c1] uppercase tracking-widest hover:underline mt-2">
+                                        <button 
+                                            type="button" 
+                                            onClick={() => fileInputRef.current?.click()}
+                                            className="text-[10px] font-black text-[#17b9c1] uppercase tracking-widest hover:underline mt-2"
+                                        >
                                             Change Picture
                                         </button>
                                     </div>
