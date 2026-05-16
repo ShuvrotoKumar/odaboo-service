@@ -14,6 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  openGraph: {
+    images: "/Logo.png",
+  },
   title: "Odaboo | Find Expert Services For Any Need",
   description: "Connect with trusted professionals for your home, business, and personal needs. Book appointments, manage payments, and get things done.",
 };

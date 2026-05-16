@@ -75,20 +75,18 @@ export const HowItWorks = () => {
                 key={step.id}
                 onMouseEnter={() => setActiveId(step.id)}
                 layout
-                className={`relative flex flex-col p-10 rounded-[3rem] cursor-pointer transition-all duration-700 overflow-hidden ${
-                  isActive 
-                    ? "bg-white shadow-[0_40px_100px_rgba(0,0,0,0.08)] ring-1 ring-slate-100" 
+                className={`relative flex flex-col p-10 rounded-[3rem] cursor-pointer transition-all duration-700 overflow-hidden ${isActive
+                    ? "bg-white shadow-[0_40px_100px_rgba(0,0,0,0.08)] ring-1 ring-slate-100"
                     : "bg-white/40 hover:bg-white/60 border border-transparent"
-                }`}
+                  }`}
                 style={{
                   flexGrow: isActive ? 2 : 1,
                   flexBasis: "0%",
                 }}
               >
                 {/* Step Number */}
-                <div className={`absolute top-10 right-10 text-6xl font-black transition-opacity duration-500 ${
-                  isActive ? "opacity-5 text-slate-900" : "opacity-0"
-                }`}>
+                <div className={`absolute top-10 right-10 text-6xl font-black transition-opacity duration-500 ${isActive ? "opacity-5 text-slate-900" : "opacity-0"
+                  }`}>
                   0{step.id}
                 </div>
 
@@ -96,9 +94,8 @@ export const HowItWorks = () => {
                   {step.icon}
                 </div>
 
-                <h3 className={`text-2xl font-bold mb-4 transition-colors duration-500 ${
-                  isActive ? "text-slate-900" : "text-slate-400"
-                }`}>
+                <h3 className={`text-2xl font-bold mb-4 transition-colors duration-500 ${isActive ? "text-slate-900" : "text-slate-400"
+                  }`}>
                   {step.title}
                 </h3>
 
@@ -113,7 +110,7 @@ export const HowItWorks = () => {
                       <p className="text-slate-500 text-lg leading-relaxed mb-8">
                         {step.description}
                       </p>
-                      
+
                       <Link href="/about">
                         <motion.div
                           initial={{ opacity: 0, x: -10 }}
