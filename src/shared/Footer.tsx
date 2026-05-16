@@ -86,9 +86,9 @@ export const Footer = () => {
               <Image
                 src="/Logo.png"
                 alt="Odaboo Logo"
-                width={150}
-                height={50}
-                className="brightness-0 invert opacity-90"
+                width={160}
+                height={55}
+                className="h-11 w-auto object-contain"
               />
             </Link>
             <p className="text-lg leading-relaxed max-w-sm text-slate-500">

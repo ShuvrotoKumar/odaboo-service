@@ -270,72 +270,143 @@ export const Navbar = () => {
       {/* Mobile Drawer */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-40 lg:hidden bg-white p-6 flex flex-col"
-          >
-            <div className="flex justify-between items-center mb-8">
-              <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-                <Image
-                  src="/Logo.png"
-                  alt="Odaboo Logo"
-                  width={120}
-                  height={35}
-                  className="h-9 w-auto object-contain"
-                />
-              </Link>
-              <button onClick={() => setIsMobileMenuOpen(false)}>
-                <X className="w-6 h-6" />
-              </button>
-            </div>
+          <>
+            {/* Backdrop Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+            />
 
-            <div className="flex flex-col gap-8 mb-10">
-              {NAV_LINKS.map((link) => {
-                if (link.name === "Feed" && !isLoggedIn) return null;
-                return (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className="text-2xl font-[900] text-slate-900 hover:text-primary transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              })}
-            </div>
+            {/* Menu Content */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 bottom-0 w-[75%] sm:w-[50%] z-50 lg:hidden bg-white p-6 flex flex-col shadow-2xl"
+            >
+              <div className="flex justify-between items-center mb-10">
+                <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Image
+                    src="/Logo.png"
+                    alt="Odaboo Logo"
+                    width={120}
+                    height={35}
+                    className="h-9 w-auto object-contain"
+                  />
+                </Link>
+                <button onClick={() => setIsMobileMenuOpen(false)}>
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
 
-            <div className="mt-auto flex flex-col gap-4">
-              {isLoggedIn ? (
-                <>
-                  <PrimaryButton
-                    className="w-full bg-[#17b9c1] hover:bg-[#15a7ad] text-white rounded-[10px] h-12 font-semibold"
-                    onClick={() => {
+              {/* 1. Main Nav Options at the Top */}
+              <div className="flex flex-col gap-6 mb-10 overflow-y-auto">
+                {NAV_LINKS.map((link) => {
+                  if (link.name === "Feed" && !isLoggedIn) return null;
+                  return (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className="text-2xl font-[800] text-slate-900 hover:text-primary transition-colors border-b border-slate-50 pb-4"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* 2. Profile & Bottom Section */}
+              <div className="mt-auto space-y-4">
+                {isLoggedIn ? (
+                  <div className="border-t border-slate-100 pt-6">
+                    {/* Profile Dropdown Toggle */}
+                    <button
+                      onClick={() => setIsProfileOpen(!isProfileOpen)}
+                      className="flex items-center justify-between w-full p-4 bg-slate-50 rounded-2xl border border-slate-100 transition-all hover:bg-slate-100"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full border border-[#17b9c1] p-0.5 overflow-hidden">
+                          <Image
+                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop"
+                            alt="Profile"
+                            width={40}
+                            height={40}
+                            className="w-full h-full object-cover rounded-full"
+                          />
+                        </div>
+                        <div className="text-left">
+                          <p className="text-sm font-bold text-slate-900">Jane Doe</p>
+                          <p className="text-[10px] text-slate-500 uppercase tracking-wider">{userRole}</p>
+                        </div>
+                      </div>
+                      <ChevronDown className={cn("w-5 h-5 text-slate-400 transition-transform duration-300", isProfileOpen && "rotate-180")} />
+                    </button>
+
+                    {/* Profile Options Accordion */}
+                    <AnimatePresence>
+                      {isProfileOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="grid grid-cols-1 gap-1 py-2 px-1">
+                            {(userRole === "provider" ? PROVIDER_MENU : CUSTOMER_MENU).map((item) => (
+                              <Link
+                                key={item.name}
+                                href={item.href}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-slate-50 transition-colors group"
+                              >
+                                <item.icon className="w-5 h-5 text-slate-500 group-hover:text-primary" />
+                                <span className="text-sm font-semibold text-slate-700 group-hover:text-slate-900">
+                                  {item.name}
+                                </span>
+                              </Link>
+                            ))}
+                            <button
+                              onClick={handleLogout}
+                              className="flex items-center gap-3 py-3 px-4 rounded-xl hover:bg-red-50 transition-colors group text-red-500"
+                            >
+                              <LogOut className="w-5 h-5" />
+                              <span className="text-sm font-bold">Logout</span>
+                            </button>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    <PrimaryButton
+                      className="w-full bg-[#17b9c1] hover:bg-[#15a7ad] text-white rounded-xl h-14 font-bold mt-4 shadow-lg shadow-cyan-500/10"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        router.push("/post");
+                      }}
+                    >
+                      Post requirements
+                    </PrimaryButton>
+                  </div>
+                ) : (
+                  <div className="border-t border-slate-100 pt-6 flex flex-col gap-3">
+                    <PrimaryButton className="w-full h-14 rounded-xl font-bold" onClick={() => {
                       setIsMobileMenuOpen(false);
-                      router.push("/post");
-                    }}
-                  >
-                    Post your requirements
-                  </PrimaryButton>
-                  <button className="text-slate-600 font-medium py-2 hover:text-primary transition-colors text-left" onClick={handleLogout}>Logout</button>
-                </>
-              ) : (
-                <>
-                  <PrimaryButton className="w-full" onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    router.push("/auth/login");
-                  }}>Login</PrimaryButton>
-                  <PrimaryButton variant="outline" className="w-full" onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    router.push("/auth/confirm_auth");
-                  }}>Sign Up</PrimaryButton>
-                </>
-              )}
-            </div>
-          </motion.div>
+                      router.push("/auth/login");
+                    }}>Login</PrimaryButton>
+                    <PrimaryButton variant="outline" className="w-full h-14 rounded-xl font-bold" onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      router.push("/auth/confirm_auth");
+                    }}>Sign Up</PrimaryButton>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>
